@@ -1,0 +1,33 @@
+$bp-tablet: 48em; //768px
+$bp-desktop-small: 69.375em; // 1110px
+$bp-desktop: 90em; //1440px
+/* 
+==================================
+
+    RESOLUTIONS MIXINS
+
+==================================
+*/
+@mixin tablet {
+  @media (min-width: #{$bp-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktopSmall {
+  @media (min-width: #{$bp-desktop-small}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$bp-desktop}) {
+    @content;
+  }
+}
+
+:export {
+  bpTablet: $bp-tablet;
+  bpDesktopSmall: $bp-desktop-small;
+  bpDesktop: $bp-desktop;
+}

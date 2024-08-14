@@ -1,0 +1,91 @@
+@use "resolutions" as *;
+
+:root {
+  --c-pure-white: #ffffff;
+  --c-red: #fc4747;
+  --c-dark-blue: #10141e;
+  --c-greyish-blue: #5a698f;
+  --c-semi-dark-blue: #161d2f;
+
+  /* Heading */
+  --h-f-l: 3.2rem;
+  --h-f-m: 2.4rem;
+  --h-f-s: 2.4rem;
+  --h-f-xs: 1.8rem;
+
+  /* Heading Letter Spacing */
+  --h-ls-l: -0.5rem;
+
+  /* Body */
+  --body-f-m: 1.5rem;
+  --body-f-s: 1.3rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%; //10px/16px = 62.5%, 1rem = 10px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-size: var(--body-f-m);
+  font-weight: 300;
+  background-color: var(--c-dark-blue);
+  color: var(--c-pure-white);
+}
+
+.wrapper {
+  width: min(1360px, calc(100% - 32px));
+  margin-inline: auto;
+
+  @include tablet {
+    width: min(1360px, calc(100% - 48px));
+  }
+
+  @include desktopSmall {
+    width: min(1360px, calc(100% - 64px));
+  }
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  vertical-align: middle;
+  font-style: italic;
+  background-repeat: no-repeat;
+  background-size: cover;
+  shape-margin: 1rem;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
