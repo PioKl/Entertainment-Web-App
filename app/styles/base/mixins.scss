@@ -1,0 +1,35 @@
+@use "./resolutions.scss" as *;
+
+@mixin wrapper {
+  width: min(1360px, calc(100% - 32px));
+  margin-inline: auto;
+
+  @include tablet {
+    width: min(1360px, calc(100% - 48px));
+  }
+
+  @include desktopSmall {
+    width: min(1360px, calc(100% - 64px));
+  }
+}
+
+@mixin wrapperTablet {
+  width: min(1360px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+@mixin wrapperDesktop {
+  width: min(1360px, calc(100% - 64px));
+}
+
+@mixin wrapperDesktopRemove {
+  width: auto;
+  margin-inline: auto;
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
