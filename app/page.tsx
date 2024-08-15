@@ -2,7 +2,10 @@ export default function Home() {
   return (
     <main>
       <div>
-        <h2>Hello</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae ad
+          debitis aut dolores dicta.
+        </p>
       </div>
     </main>
   );
