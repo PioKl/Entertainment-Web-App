@@ -1,0 +1,56 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.header {
+  padding-block: 1.8rem;
+  margin-bottom: 2.4rem;
+  background-color: var(--c-semi-dark-blue);
+
+  @include tablet {
+    padding-block: 2.4rem;
+    margin-bottom: 3.3rem;
+    border-radius: 1rem;
+  }
+
+  @include desktopSmall {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 90vh;
+    padding: 3.2rem;
+    margin-right: 3.6rem;
+    border-radius: 2rem;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include wrapper;
+
+  @include desktopSmall {
+    @include wrapperDesktopRemove;
+    flex-direction: column;
+  }
+
+  &__links-item-list {
+    display: flex;
+    align-items: center;
+    gap: 2.4rem;
+
+    @include desktopSmall {
+      flex-direction: column;
+    }
+  }
+
+  &__links-item {
+    &:hover,
+    &:focus-visible {
+      .nav-icon path {
+        fill: var(--c-pure-white);
+      }
+    }
+  }
+}
