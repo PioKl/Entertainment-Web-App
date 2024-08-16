@@ -1,0 +1,68 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 2rem;
+  margin-bottom: 2.4rem;
+  @include wrapper;
+
+  @include tablet {
+    margin-bottom: 3.3rem;
+    @include wrapperRemove;
+  }
+  @include desktopSmall {
+    margin-bottom: 3.4rem;
+  }
+  &__input-container {
+    display: flex;
+    flex-grow: 13;
+    align-items: center;
+    column-gap: 1.6rem;
+
+    @include tablet {
+      column-gap: 2.4rem;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    font-size: 1.6rem;
+    background-color: transparent;
+    border: transparent;
+    color: var(--c-pure-white);
+
+    &::placeholder {
+      color: rgba(var(--c-pure-white-rgba), 0.5);
+    }
+
+    &:focus-within {
+      outline: transparent;
+      caret-color: var(--c-red);
+    }
+
+    @include tablet {
+      font-size: var(--h-f-m);
+    }
+  }
+  &__button-submit {
+    flex: 1;
+    padding: 0.5rem 1.6rem;
+    background-color: var(--c-red);
+    color: var(--c-pure-white);
+    border: none;
+    border-radius: 0.6rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover,
+    &:focus-within {
+      background-color: var(--c-pure-white);
+      color: var(--c-semi-dark-blue);
+    }
+  }
+}
