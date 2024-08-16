@@ -22,6 +22,11 @@
   width: min(1360px, calc(100% - 64px));
 }
 
+@mixin wrapperRemove {
+  width: auto;
+  margin-inline: initial;
+}
+
 @mixin wrapperDesktopRemove {
   width: auto;
   margin-inline: auto;
