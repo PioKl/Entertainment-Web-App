@@ -31,7 +31,7 @@
   @include wrapper;
 
   @include desktopSmall {
-    @include wrapperDesktopRemove;
+    @include wrapperRemove;
     flex-direction: column;
   }
 
