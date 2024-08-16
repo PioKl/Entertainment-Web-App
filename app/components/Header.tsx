@@ -28,7 +28,7 @@ export default function Header() {
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/">
+            <Link href="/pages/movies">
               <TvIcon className={styles["nav-icon"]} />
             </Link>
           </li>
@@ -38,7 +38,7 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <Link href="/">
+        <Link href="/pages/account/login">
           <Image
             src={AvatarImage}
             alt="Avatar"
