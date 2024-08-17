@@ -1,0 +1,19 @@
+@use "../base/resolutions.scss" as *;
+@use "../base/mixins.scss" as *;
+
+.home {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  @include tablet {
+    @include wrapperTablet;
+    padding-block: 2.4rem;
+  }
+
+  @include desktopSmall {
+    @include wrapperDesktop;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    padding-block: 3.2rem;
+  }
+}
