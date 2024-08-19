@@ -15,6 +15,7 @@
 
   &__label {
     display: flex;
+    align-items: center;
     border: transparent;
     border-bottom: 1px solid var(--c-greyish-blue);
 
@@ -37,6 +38,12 @@
     &::placeholder {
       color: rgba(var(--c-pure-white-rgba), 0.5);
     }
+  }
+
+  &__error {
+    margin-left: auto;
+    font-size: var(--body-f-s);
+    color: var(--c-red);
   }
 
   &__button {
