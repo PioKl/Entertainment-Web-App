@@ -5,10 +5,47 @@ import { useState } from "react";
 import styles from "../../../styles/login.module.scss";
 
 export default function Login() {
-  const [emptyForm, setEmptyFrom] = useState(true);
+  //const [emptyForm, setEmptyFrom] = useState(true);
+
+  const [errors, setErrors] = useState({
+    email: false,
+    password: false,
+  });
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
+
+  const messages = {
+    errorMessage: "Can’t be empty",
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(values.email);
+
+    const newErrors = {
+      email: values.email === "",
+      password: values.password === "",
+    };
+
+    // Ustawienie błędów w postaci true i false
+    if (newErrors.email || newErrors.password) {
+      setErrors(newErrors);
+    }
+    //Jeśli nie ma błędów, będzie wysłany endpoint
+    else {
+      setErrors({
+        email: false,
+        password: false,
+      });
+      setValues({
+        email: "",
+        password: "",
+      });
+      console.log("Send");
+    }
   };
   return (
     <>
@@ -18,20 +55,38 @@ export default function Login() {
           <div className={styles["login__inputs-container"]}>
             <label htmlFor="email" className={styles["login__label"]}>
               <input
+                value={values.email}
+                onChange={(e) =>
+                  setValues({ ...values, email: e.target.value })
+                }
                 className={styles["login__input"]}
-                pattern="[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}"
                 id="email"
                 type="email"
                 placeholder="Email address"
-                required
+                autoComplete="username"
               />
+              {errors.email && (
+                <span className={styles["login__error"]}>
+                  {messages.errorMessage}
+                </span>
+              )}
             </label>
             <label className={styles["login__label"]}>
               <input
+                value={values.password}
+                onChange={(e) =>
+                  setValues({ ...values, password: e.target.value })
+                }
                 className={styles["login__input"]}
                 type="password"
                 placeholder="Password"
+                autoComplete="current-password"
               />
+              {errors.password && (
+                <span className={styles["login__error"]}>
+                  {messages.errorMessage}
+                </span>
+              )}
             </label>
           </div>
 
