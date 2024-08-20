@@ -15,7 +15,10 @@ export default function Search() {
             />
           </label>
         </div>
-        <button className={styles["search__button-submit"]} type="submit">
+        <button
+          className={`btn ${styles["search__button-submit"]}`}
+          type="submit"
+        >
           Submit
         </button>
       </form>
