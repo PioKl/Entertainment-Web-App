@@ -47,7 +47,7 @@
 
   &__links-item {
     &:hover,
-    &:focus-visible {
+    & :focus-visible {
       .nav-icon path {
         fill: var(--c-pure-white);
       }
