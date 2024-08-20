@@ -18,3 +18,21 @@ h5 {
   font-size: var(--h-f-xs);
   font-weight: 500;
 }
+
+.btn {
+  flex: 1;
+  background-color: var(--c-red);
+  color: var(--c-pure-white);
+  border: none;
+  border-radius: 0.6rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover,
+  &:focus-within {
+    background-color: var(--c-pure-white);
+    color: var(--c-semi-dark-blue);
+  }
+}
