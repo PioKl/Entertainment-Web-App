@@ -1,0 +1,16 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.card-trending {
+  position: relative;
+
+  &__image {
+    border-radius: 0.8rem;
+    background-color: var(--c-semi-dark-blue);
+  }
+
+  &__title {
+    position: absolute;
+    top: 0;
+  }
+}
