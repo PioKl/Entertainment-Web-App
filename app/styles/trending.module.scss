@@ -1,0 +1,25 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.trending {
+  @include wrapper;
+  height: clamp(20.5rem, 7.129rem + 35.656vw, 42.5rem);
+  margin-bottom: 2.4rem;
+
+  @include tablet {
+    @include wrapperRemove;
+    margin-bottom: 3.9rem;
+  }
+
+  @include desktopSmall {
+    height: clamp(26rem, 9.85rem + 14.563vw, 42.5rem);
+    margin-bottom: 4rem;
+  }
+  &__heading {
+    margin-bottom: 2.5rem;
+  }
+  &__swiper {
+    display: grid;
+    position: absolute;
+  }
+}
