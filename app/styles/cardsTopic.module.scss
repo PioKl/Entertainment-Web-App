@@ -1,0 +1,35 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.cardsTopic {
+  @include wrapper;
+
+  @include tablet {
+    @include wrapperRemove;
+  }
+  &__title {
+    margin-bottom: 2.4rem;
+
+    @include desktopSmall {
+      margin-bottom: 3.2rem;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    @include tablet {
+      column-gap: 2.9rem;
+      row-gap: 2.4rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include desktopSmall {
+      column-gap: 4rem;
+      row-gap: 3.2rem;
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
