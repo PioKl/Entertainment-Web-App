@@ -3,8 +3,10 @@
 
 .trending {
   @include wrapper;
-  height: clamp(20.5rem, 7.129rem + 35.656vw, 42.5rem);
   margin-bottom: 2.4rem;
+  //65px bierze się z wysokości headingu i jego marginesu
+  //clamp jest również używany w CardTrending
+  height: calc(6.5rem + clamp(14rem, 5.412rem + 22.901vw, 23rem));
 
   @include tablet {
     @include wrapperRemove;
@@ -12,14 +14,16 @@
   }
 
   @include desktopSmall {
-    height: clamp(26rem, 9.85rem + 14.563vw, 42.5rem);
     margin-bottom: 4rem;
+  }
+
+  &__container {
+    position: absolute;
   }
   &__heading {
     margin-bottom: 2.5rem;
   }
   &__swiper {
     display: grid;
-    position: absolute;
   }
 }
