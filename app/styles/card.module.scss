@@ -1,0 +1,80 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.card {
+  &__image-container {
+    height: clamp(11rem, 7.735rem + 8.707vw, 17.4rem);
+    margin-bottom: 0.8rem;
+  }
+  &__image {
+    border-radius: 8px;
+    height: inherit;
+  }
+
+  &__bookmark {
+    position: absolute;
+    right: 0;
+    display: grid;
+    place-items: center;
+    margin: 0.8rem;
+    padding: 1rem;
+    background-color: rgba(var(--c-dark-blue-rgb), 0.5);
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-pure-white);
+      .card__bookmark-icon path {
+        stroke: var(--c-dark-blue);
+      }
+    }
+
+    &.--active {
+      .card__bookmark-icon path {
+        fill: var(--c-pure-white);
+      }
+    }
+  }
+
+  &__info-items-list {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+    color: rgba(var(--c-pure-white-rgba), 0.75);
+
+    @include tablet {
+      margin-bottom: 0.5rem;
+      font-size: var(--body-f-s);
+    }
+  }
+  &__info-list-item {
+    display: flex;
+    align-items: center;
+    gap: inherit;
+    &:not(:last-child)::after {
+      content: "";
+      display: block;
+      width: 0.3rem;
+      height: 0.3rem;
+      background-color: rgba(var(--c-pure-white-rgba), 0.5);
+      border-radius: 1rem;
+    }
+  }
+  &__title {
+    display: flex;
+    text-align: left;
+    font-size: 1.4rem;
+    font-weight: 500;
+
+    @include tablet {
+      font-size: var(--h-f-xs);
+    }
+  }
+}
