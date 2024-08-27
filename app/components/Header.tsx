@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <nav className={`${styles.nav}`}>
-        <Link href="/">
+        <Link href="/" className={styles["nav__home-link"]}>
           <LogoIcon className={styles["nav__logo"]} />
         </Link>
         <ul className={styles["nav__links-item-list"]}>
@@ -23,12 +23,12 @@ export default function Header() {
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/">
+            <Link href="/pages/movies">
               <MoviesIcon className={styles["nav-icon"]} />
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/pages/movies">
+            <Link href="/">
               <TvIcon className={styles["nav-icon"]} />
             </Link>
           </li>
@@ -38,14 +38,23 @@ export default function Header() {
             </Link>
           </li>
         </ul>
-        <Link href="/pages/account/login">
+        <Link
+          href="/pages/account/login"
+          className={styles["nav__login-link"]}
+          style={{
+            position: "relative",
+            width: "clamp(2.4rem, 1.584rem + 2.177vw, 4rem)",
+            height: "clamp(2.4rem, 1.584rem + 2.177vw, 4rem)",
+          }}
+        >
           <Image
             src={AvatarImage}
             alt="Avatar"
-            width={24}
-            height={24}
-            priority
-            className={styles["nav__image"]}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover" }}
+            priority={true}
+            className={styles["nav__avatar-image"]}
           />
         </Link>
       </nav>
