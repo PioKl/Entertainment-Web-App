@@ -33,6 +33,13 @@
   @include desktopSmall {
     @include wrapperRemove;
     flex-direction: column;
+    justify-content: initial;
+  }
+
+  &__home-link {
+    @include desktopSmall {
+      margin-bottom: 7.5rem;
+    }
   }
 
   &__links-item-list {
@@ -51,6 +58,12 @@
       .nav-icon path {
         fill: var(--c-pure-white);
       }
+    }
+  }
+
+  &__login-link {
+    @include desktopSmall {
+      margin-top: auto;
     }
   }
 }
