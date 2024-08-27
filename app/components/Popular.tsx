@@ -13,19 +13,16 @@ export default function Trending() {
     `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
     fetcher
   );
-  /* console.log(movies); */
 
   return (
     <>
       <section className={styles.cardsTopic}>
         <h2 className={styles["cardsTopic__title"]}>Popular</h2>
         <div className={styles["cardsTopic__cards"]}>
-          {movies ? (
-            movies.map((movie: any) => <Card key={movie.id} movie={movie} />)
-          ) : (
-            <Loader />
-          )}
+          {movies &&
+            movies.map((movie: any) => <Card key={movie.id} movie={movie} />)}
         </div>
+        {!movies && <Loader />}
       </section>
     </>
   );
