@@ -15,6 +15,7 @@ const CardTrending: React.FC<CardTrendingProps> = ({ movie }) => {
       style={{
         position: "relative",
         height: "clamp(14rem, 5.412rem + 22.901vw, 23rem)",
+        width: "100%",
       }}
     >
       <Image
