@@ -1,4 +1,8 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
 .main {
   display: flex;
   flex-direction: column;
+  margin-bottom: calc(3.2rem * 2);
 }
