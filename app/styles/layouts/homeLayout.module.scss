@@ -4,6 +4,7 @@
 .home {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-height: inherit;
 
   @include tablet {
     @include wrapperTablet;
