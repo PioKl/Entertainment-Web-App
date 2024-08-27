@@ -1,0 +1,48 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.footer {
+  display: flex;
+  margin-bottom: 2.4rem;
+
+  @include wrapper;
+
+  @include tablet {
+    @include wrapperRemove;
+    width: 100%;
+  }
+
+  @include desktopSmall {
+    grid-column: 1 / -1;
+  }
+
+  &__link-container {
+    display: grid;
+    width: inherit;
+    margin-inline: auto;
+
+    span {
+      font-weight: 500;
+      margin-inline: inherit;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__tmdb-link {
+    display: flex;
+    margin-inline: inherit;
+    width: 23.9rem;
+
+    @include tablet {
+      width: 35.8rem;
+    }
+  }
+
+  &__tmdb-logo {
+    max-height: 2rem;
+
+    @include tablet {
+      max-height: 3rem;
+    }
+  }
+}
