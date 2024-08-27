@@ -23,7 +23,7 @@ export default function Trending() {
         <div className={styles["trending__container"]}>
           <h2 className={styles["trending__heading"]}>Trending</h2>
           <div className={styles["trending__swiper"]}>
-            {movies ? (
+            {movies && (
               <Swiper
                 grabCursor={true}
                 slidesPerView={1.5}
@@ -62,11 +62,10 @@ export default function Trending() {
                   </SwiperSlide>
                 ))}
               </Swiper>
-            ) : (
-              <Loader />
             )}
           </div>
         </div>
+        {!movies && <Loader />}
       </section>
     </>
   );
