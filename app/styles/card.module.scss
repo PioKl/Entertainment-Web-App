@@ -5,9 +5,11 @@
   &__image-container {
     height: clamp(11rem, 7.735rem + 8.707vw, 17.4rem);
     margin-bottom: 0.8rem;
+    background-color: var(--c-semi-dark-blue);
+    border-radius: 8px;
   }
   &__image {
-    border-radius: 8px;
+    border-radius: inherit;
     height: inherit;
   }
 
@@ -66,6 +68,9 @@
       background-color: rgba(var(--c-pure-white-rgba), 0.5);
       border-radius: 1rem;
     }
+  }
+  &__media-type {
+    text-transform: capitalize;
   }
   &__title {
     display: flex;
