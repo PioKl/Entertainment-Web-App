@@ -23,23 +23,23 @@ export default function Header() {
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/pages/movies">
+            <Link href="/movies">
               <MoviesIcon className={styles["nav-icon"]} />
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/">
+            <Link href="/tv">
               <TvIcon className={styles["nav-icon"]} />
             </Link>
           </li>
           <li className={styles["nav__links-item"]}>
-            <Link href="/">
+            <Link href="/bookmarked">
               <BookmarkIcon className={styles["nav-icon"]} />
             </Link>
           </li>
         </ul>
         <Link
-          href="/pages/account/login"
+          href="/login"
           className={styles["nav__login-link"]}
           style={{
             position: "relative",
