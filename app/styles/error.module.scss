@@ -1,0 +1,18 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.error {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  &.--static {
+    position: initial;
+    transform: initial;
+  }
+
+  &__heading {
+    text-align: center;
+  }
+}
