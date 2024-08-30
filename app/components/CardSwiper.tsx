@@ -28,6 +28,7 @@ const CardSwiper: React.FC<CardSwiperProps> = ({ movie }) => {
         priority={true}
       />
 
+      {/* W przyszłości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
       <button type="button" className={styles["card-swiper__bookmark"]}>
         <BookMarkIcon className={styles["card-swiper__bookmark-icon"]} />
       </button>
