@@ -123,6 +123,45 @@ a {
   object-fit: cover;
 }
 
-.error {
-  text-align: center;
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 6.4rem;
+  font-size: var(--body-f-s);
+
+  .MuiPaginationItem-root {
+    font-size: var(--body-f-s);
+    font-family: inherit;
+    background-color: transparent;
+    border: 0.1rem solid var(--c-red);
+    color: var(--c-pure-white);
+    border-radius: 0.8rem;
+
+    //Strzałki
+    .MuiPaginationItem-icon {
+      font-size: 2rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-red);
+      color: var(--c-pure-white);
+    }
+
+    //Przyciski nawigacji
+    &.Mui-selected {
+      background-color: var(--c-red);
+      color: var(--c-pure-white);
+    }
+
+    //Trzy kropki
+    &.MuiPaginationItem-ellipsis {
+      border: transparent;
+
+      &:hover,
+      &:focus-visible {
+        background-color: transparent;
+      }
+    }
+  }
 }
