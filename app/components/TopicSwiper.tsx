@@ -3,6 +3,7 @@ import { fetcher } from "../utils/fetcher";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/scss";
+import Error from "@/app/components/Error";
 import CardSwiper from "./CardSwiper";
 import Loader from "./Loader";
 import styles from "../styles/topicSwiper.module.scss";
@@ -21,7 +22,7 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({ topicName, apiUrl }) => {
         <div className={styles["topic-swiper__container"]}>
           <h2 className={styles["topic-swiper__heading"]}>{topicName}</h2>
           {error ? (
-            <h3 className="error">Something Went Wrong</h3>
+            <Error errorType="error" siteType="static" />
           ) : (
             <div className={styles["topic-swiper__swiper"]}>
               {movies && (
