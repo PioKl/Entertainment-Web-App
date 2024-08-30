@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import { fetcher } from "../utils/fetcher";
 import Card from "./Card";
+import Error from "@/app/components/Error";
 import Loader from "./Loader";
 import styles from "../styles/cardsTopic.module.scss";
 
@@ -18,7 +19,7 @@ const Topic: React.FC<TopicProps> = ({ topicName, apiUrl }) => {
         <h2 className={styles["cardsTopic__title"]}>{topicName}</h2>
 
         {error ? (
-          <h3 className="error">Something Went Wrong</h3>
+          <Error errorType="error" siteType="static" />
         ) : (
           <>
             <div className={styles["cardsTopic__cards"]}>
