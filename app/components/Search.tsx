@@ -3,10 +3,26 @@ import { useState } from "react";
 import styles from "../styles/search.module.scss";
 import SearchIcon from "../images/icon-search.svg";
 
-export default function Search() {
+interface SearchProps {
+  searchType?: "all" | "movie" | "tv"; //ten props jest opcjonalny, domyślnie jest all
+}
+
+const searchTypePath = {
+  all: "/search/",
+  movie: "/search/movies/",
+  tv: "/search/tv/",
+};
+
+const searchPlaceholder = {
+  all: "Search for movies or TV series",
+  movie: "Search for movies",
+  tv: "Search for TV series",
+};
+
+const Search: React.FC<SearchProps> = ({ searchType = "all" }) => {
   const router = useRouter();
   const [query, setQuery] = useState("");
-  const path = "/search/";
+  const path = searchTypePath[searchType];
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +42,7 @@ export default function Search() {
           <label className={styles["search__input-label"]}>
             <input
               type="text"
-              placeholder="Search for movies or TV series"
+              placeholder={searchPlaceholder[searchType]}
               className={styles["search__input"]}
               onChange={(e) => setQuery(e.target.value)}
               value={query}
@@ -42,4 +58,6 @@ export default function Search() {
       </form>
     </>
   );
-}
+};
+
+export default Search;
