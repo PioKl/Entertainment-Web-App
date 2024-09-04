@@ -9,8 +9,26 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <Search />
-      <TopicSwiper topicName="Trending" apiUrl={endpoints.trendingMovies} />
-      <Topic topicName="Popular" apiUrl={endpoints.popularMovies} />
+      <TopicSwiper
+        topicName="Trending"
+        apiUrl={endpoints.trendingMovies}
+        mediaType="movie"
+      />
+      <Topic
+        topicName="Popular"
+        apiUrl={endpoints.popularMovies}
+        mediaType="movie"
+      />
+      <TopicSwiper
+        topicName="Trending TV Series"
+        apiUrl={endpoints.trendingTv}
+        mediaType="tv"
+      />
+      <Topic
+        topicName="Popular TV Series"
+        apiUrl={endpoints.popularTv}
+        mediaType="tv"
+      />
     </main>
   );
 }
