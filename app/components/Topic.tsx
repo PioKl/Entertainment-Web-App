@@ -8,9 +8,14 @@ import styles from "../styles/cardsTopic.module.scss";
 interface TopicProps {
   topicName: string;
   apiUrl: string;
+  mediaType?: "dynamic" | "movie" | "tv";
 }
 
-const Topic: React.FC<TopicProps> = ({ topicName, apiUrl }) => {
+const Topic: React.FC<TopicProps> = ({
+  topicName,
+  apiUrl,
+  mediaType = "dynamic",
+}) => {
   const { data: movies, error } = useSWR(apiUrl, fetcher);
 
   return (
@@ -25,7 +30,7 @@ const Topic: React.FC<TopicProps> = ({ topicName, apiUrl }) => {
             <div className={styles["cardsTopic__cards"]}>
               {movies &&
                 movies.map((movie: any) => (
-                  <Card key={movie.id} movie={movie} mediaType="movie" />
+                  <Card key={movie.id} movie={movie} mediaType={mediaType} />
                 ))}
             </div>
             {!movies && <Loader />}
