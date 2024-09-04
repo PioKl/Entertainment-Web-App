@@ -2,13 +2,14 @@ import styles from "../styles/card.module.scss";
 import Image from "next/image";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import MovieIcon from "../images/icon-category-movie.svg";
+import TvIcon from "@/app/images/icon-category-tv.svg";
 
 interface CardProps {
   movie: any;
-  mediaType: "dynamic" | "movie" | "tv";
+  mediaType?: "dynamic" | "movie" | "tv";
 }
 
-const Card: React.FC<CardProps> = ({ movie, mediaType }) => {
+const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
   return (
     <div className={styles["card"]}>
       <div
@@ -43,7 +44,9 @@ const Card: React.FC<CardProps> = ({ movie, mediaType }) => {
               : movie.first_air_date && movie.first_air_date.substring(0, 4)}
           </li>
           <li className={styles["card__info-list-item"]}>
-            <MovieIcon />
+            {mediaType === "dynamic" && <MovieIcon />}
+            {mediaType === "movie" && <MovieIcon />}
+            {mediaType === "tv" && <TvIcon />}
           </li>
           <li className={styles["card__info-list-item"]}>
             <span className={styles["card__media-type"]}>
