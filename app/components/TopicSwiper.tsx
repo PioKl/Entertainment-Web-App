@@ -11,9 +11,14 @@ import styles from "../styles/topicSwiper.module.scss";
 interface TopicSwiperProps {
   topicName: string;
   apiUrl: string;
+  mediaType?: "dynamic" | "movie" | "tv";
 }
 
-const TopicSwiper: React.FC<TopicSwiperProps> = ({ topicName, apiUrl }) => {
+const TopicSwiper: React.FC<TopicSwiperProps> = ({
+  topicName,
+  apiUrl,
+  mediaType = "dynamic",
+}) => {
   const { data: movies, error } = useSWR(apiUrl, fetcher);
 
   return (
@@ -60,7 +65,7 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({ topicName, apiUrl }) => {
                 >
                   {movies.map((movie: any) => (
                     <SwiperSlide key={movie.id}>
-                      <CardSwiper movie={movie} />
+                      <CardSwiper movie={movie} mediaType={mediaType} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
