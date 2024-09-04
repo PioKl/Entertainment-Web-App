@@ -3,9 +3,14 @@
 
 .cardsTopic {
   @include wrapper;
+  margin-bottom: 2.4rem;
 
   @include tablet {
     @include wrapperRemove;
+    margin-bottom: 3.9rem;
+  }
+  @include desktopSmall {
+    margin-bottom: 4rem;
   }
   &__title {
     margin-bottom: 2.4rem;
