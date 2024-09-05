@@ -13,7 +13,6 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
   movie,
   mediaType = "dynamic",
 }) => {
-  console.log(movie);
   return (
     <div
       className={styles["card-swiper"]}
@@ -24,16 +23,19 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
         width: "100%",
       }}
     >
-      <Image
-        src={`https://image.tmdb.org/t/p/w780/${movie.backdrop_path}`}
-        alt={movie.title || movie.name}
-        className={styles["card-swiper__image"]}
-        fill
-        sizes="(max-width: 768px) 100vw, 33vw"
-        style={{ objectFit: "cover" }}
-        priority={true}
-      />
-
+      {(movie.backdrop_path || movie.poster_path) && (
+        <Image
+          src={`https://image.tmdb.org/t/p/w780/${
+            movie.backdrop_path ? movie.backdrop_path : movie.poster_path
+          }`}
+          alt={movie.title || movie.name}
+          className={styles["card-swiper__image"]}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          style={{ objectFit: "cover" }}
+          priority={true}
+        />
+      )}
       {/* W przyszłości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
       <button type="button" className={styles["card-swiper__bookmark"]}>
         <BookMarkIcon className={styles["card-swiper__bookmark-icon"]} />
