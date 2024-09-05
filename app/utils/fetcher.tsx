@@ -1,8 +1,12 @@
-export const fetcher = (url: string) =>
+/* export const fetcher = (url: string) =>
   fetch(url)
     .then((res) => res.json())
     .then((data) => data.results || []);
-
+ */
+export const fetcher = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => data.genres || data.results || []);
 //data.results || [] jeśli data results nie istnieje zwróci pustą tablicę
 
 export const fetcherSearch = async (url: string) => {
