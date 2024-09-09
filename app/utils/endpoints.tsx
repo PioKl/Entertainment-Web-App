@@ -17,3 +17,41 @@ export const endpoints: {
   genreTv: `https://api.themoviedb.org/3/genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
   genreTvCategory: `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&with_genres={id}&language=en-US&sort_by=popularity.desc`,
 };
+
+//Search All (Movies, TV)
+export function getSearchAll(query: string, page: string) {
+  return `https://api.themoviedb.org/3/search/multi?api_key=${
+    process.env.NEXT_PUBLIC_API_KEY
+  }&query=${encodeURIComponent(query)}&page=${page}`;
+}
+
+//Movies
+export function getSearchMovies(query: string, page: string) {
+  return `https://api.themoviedb.org/3/search/movie?api_key=${
+    process.env.NEXT_PUBLIC_API_KEY
+  }&query=${encodeURIComponent(query)}&page=${page}`;
+}
+
+export function getGenreMoviesByCategoryWithPage(id: string, page: string) {
+  return `https://api.themoviedb.org/3/discover/movie?api_key=${
+    process.env.NEXT_PUBLIC_API_KEY
+  }&include_adult=false&with_genres=${encodeURIComponent(
+    id
+  )}}&language=en-US&sort_by=popularity.desc&page=${page}`;
+}
+
+//TV
+
+export function getSearchTv(query: string, page: string) {
+  return `https://api.themoviedb.org/3/search/tv?api_key=${
+    process.env.NEXT_PUBLIC_API_KEY
+  }&query=${encodeURIComponent(query)}&page=${page}`;
+}
+
+export function getGenreTvByCategoryWithPage(id: string, page: string) {
+  return `https://api.themoviedb.org/3/discover/tv?api_key=${
+    process.env.NEXT_PUBLIC_API_KEY
+  }&include_adult=false&with_genres=${encodeURIComponent(
+    id
+  )}&language=en-US&sort_by=popularity.desc&page=${page}`;
+}
