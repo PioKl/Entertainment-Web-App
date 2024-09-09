@@ -126,7 +126,7 @@ a {
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 6.4rem;
+  margin-top: auto;
   font-size: var(--body-f-s);
 
   .MuiPaginationItem-root {
@@ -163,5 +163,8 @@ a {
         background-color: transparent;
       }
     }
+  }
+  .MuiPagination-ul {
+    margin-top: 6.4rem;
   }
 }
