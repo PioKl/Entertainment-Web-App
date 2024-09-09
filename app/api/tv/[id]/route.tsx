@@ -1,25 +1,20 @@
 import { NextResponse } from "next/server";
+import { getGenreTvByCategoryWithPage } from "@/app/utils/endpoints";
 
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params;
-  const url = new URL(request.url);
-  const page = url.searchParams.get("page") || "1"; //Domyślnie strona pierwsza
+  const { searchParams } = new URL(request.url); //dla przypomnienia np. const searchParams = new URL(request.url).searchParams;
+  const { id } = params; // const id = params.id tak dla przypomnienia
+  const page = searchParams.get("page") || "1"; //Domyślnie strona pierwsza
 
   if (!id) {
     return NextResponse.json({ error: "ID is missing" }, { status: 400 });
   }
 
   try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/discover/tv?api_key=${
-        process.env.NEXT_PUBLIC_API_KEY
-      }&include_adult=false&with_genres=${encodeURIComponent(
-        id
-      )}&language=en-US&sort_by=popularity.desc&page=${page}`
-    );
+    const response = await fetch(getGenreTvByCategoryWithPage(id, page));
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
