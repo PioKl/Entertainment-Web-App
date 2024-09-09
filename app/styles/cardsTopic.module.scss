@@ -3,6 +3,9 @@
 
 .cardsTopic {
   @include wrapper;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   margin-bottom: 2.4rem;
 
   @include tablet {
