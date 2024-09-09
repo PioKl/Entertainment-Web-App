@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/styles/page.module.scss";
+import styles from "@/app/styles/genreFilter.module.scss";
 import { endpoints } from "@/app/utils/endpoints";
 import useSWR from "swr";
 import { fetcher } from "@/app/utils/fetcher";
@@ -21,8 +21,8 @@ const filterTypeEndpoint = {
 };
 
 const filterPlaceholder = {
-  movie: "Choose category for movies",
-  tv: "Choose category for tv",
+  movie: "Choose category for Movies",
+  tv: "Choose category for TV",
 };
 
 const GenreFilter: React.FC<GenreFilterProps> = ({ filterType }) => {
@@ -60,10 +60,13 @@ const GenreFilter: React.FC<GenreFilterProps> = ({ filterType }) => {
     <>
       {!error && (
         <div className={styles["genre-dropdown"]}>
-          <form onSubmit={handleSearchByGenre}>
+          <form
+            className={styles["genre-dropdown__form"]}
+            onSubmit={handleSearchByGenre}
+          >
             <button
               type="button"
-              className={styles["genre-dropdown__button"]}
+              className={`btn ${styles["genre-dropdown__button"]}`}
               onClick={handleGenreDropdownButton}
             >
               {!genreName ? `${filterPlaceholder[filterType]}` : genreName}
