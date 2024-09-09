@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getSearchTv } from "@/app/utils/endpoints";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -13,13 +14,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/tv?api_key=${
-        process.env.NEXT_PUBLIC_API_KEY
-      }&query=${encodeURIComponent(query)}&page=${page}`
-    );
+    const response = await fetch(getSearchTv(query, page));
     const data = await response.json();
-    console.log(data);
 
     return NextResponse.json(data);
   } catch (error) {
