@@ -1,0 +1,59 @@
+@use "./base/resolutions.scss" as *;
+@use "./base/mixins.scss" as *;
+
+.genre-dropdown {
+  @include wrapper;
+  margin-bottom: 3.2rem;
+
+  @include tablet {
+    @include wrapperRemove;
+  }
+
+  &__form {
+    position: relative;
+    display: flex;
+
+    @include tablet {
+      display: inline-block;
+    }
+  }
+  &__button {
+    padding: 0.5rem 1.6rem;
+
+    @include tablet {
+      padding-block: 1rem;
+    }
+  }
+  &__options-list {
+    position: absolute;
+    z-index: 2;
+    display: none;
+    gap: 1rem;
+    width: 100%;
+    top: 5rem;
+    padding-block: 1rem;
+    background-color: var(--c-semi-dark-blue);
+    border-radius: 2rem;
+
+    &.--show {
+      display: grid;
+    }
+  }
+  &__option {
+    button {
+      width: 100%;
+      color: var(--c-greyish-blue);
+      background-color: transparent;
+      border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover,
+      &:focus-visible {
+        color: var(--c-pure-white);
+      }
+    }
+  }
+}
