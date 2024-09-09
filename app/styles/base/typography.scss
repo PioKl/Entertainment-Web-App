@@ -31,7 +31,7 @@ h5 {
   }
 
   &:hover,
-  &:focus-within {
+  &:focus-visible {
     background-color: var(--c-pure-white);
     color: var(--c-semi-dark-blue);
   }
