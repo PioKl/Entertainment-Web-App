@@ -48,13 +48,13 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
   const [siblingCount, setSiblingCount] = useState<number>(0);
 
   // URL z parametrami paginacji
-  const url = query
+  const apiUrl = query
     ? `/api/search/${searchTypeApiPath[searchType]}?query=${encodeURIComponent(
         query
       )}&page=${currentPage}`
     : null;
 
-  const { data, error } = useSWR(url, fetcherSearch);
+  const { data, error } = useSWR(apiUrl, fetcherSearch);
 
   const results = data?.results || [];
   const totalResults = data?.totalResults || 0;
