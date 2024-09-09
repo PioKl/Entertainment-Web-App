@@ -47,10 +47,10 @@ const GenreFilterResults = ({
   const [currentPage, setCurrentPage] = useState<number>(initialPage);
   const [siblingCount, setSiblingCount] = useState<number>(0);
 
-  const url = genreId ? filterTypeApiPath[filterType] : null;
+  const apiUrl = genreId ? filterTypeApiPath[filterType] : null;
 
   const { data, error } = useSWR(
-    `${url}${genreId}?page=${currentPage}`,
+    `${apiUrl}${genreId}?page=${currentPage}`,
     fetcherSearch
   );
 
@@ -58,10 +58,6 @@ const GenreFilterResults = ({
   const totalResults = data?.totalResults || 0;
   const totalPages = data?.totalPages || 0;
   const loading = !data && !error;
-
-  console.log(data);
-  console.log(results);
-  console.log(totalResults);
 
   useEffect(() => {
     if (window.innerWidth > emToPixels(breakpoints.bpTablet)) {
