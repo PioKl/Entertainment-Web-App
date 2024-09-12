@@ -12,21 +12,25 @@ export default function Home() {
       <TopicSwiper
         topicName="Trending"
         apiUrl={endpoints.trendingMovies}
+        topicType="movieTrending"
         mediaType="movie"
       />
       <Topic
         topicName="Popular"
         apiUrl={endpoints.popularMovies}
+        topicType="moviePopular"
         mediaType="movie"
       />
       <TopicSwiper
         topicName="Trending TV Series"
         apiUrl={endpoints.trendingTv}
+        topicType="tvTrending"
         mediaType="tv"
       />
       <Topic
         topicName="Popular TV Series"
         apiUrl={endpoints.popularTv}
+        topicType="tvPopular"
         mediaType="tv"
       />
     </main>
