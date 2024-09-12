@@ -14,11 +14,13 @@ export default function Movies() {
       <TopicSwiper
         topicName="Trending"
         apiUrl={endpoints.trendingMovies}
+        topicType="movieTrending"
         mediaType="movie"
       />
       <Topic
         topicName="Popular"
         apiUrl={endpoints.popularMovies}
+        topicType="moviePopular"
         mediaType="movie"
       />
     </main>
