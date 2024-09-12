@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { useRouter } from "next/navigation";
 import { fetcher } from "../utils/fetcher";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
@@ -11,21 +12,56 @@ import styles from "../styles/topicSwiper.module.scss";
 interface TopicSwiperProps {
   topicName: string;
   apiUrl: string;
+  topicType?: "movieTrending" | "tvTrending"; //?: opcjonalny props
   mediaType?: "dynamic" | "movie" | "tv";
 }
+
+const topicSwiperSeeMorePath = {
+  movieTrending: "/movies/trending/1",
+  tvTrending: "/tv/trending/1",
+};
 
 const TopicSwiper: React.FC<TopicSwiperProps> = ({
   topicName,
   apiUrl,
+  topicType,
   mediaType = "dynamic",
 }) => {
+  const router = useRouter();
   const { data: movies, error } = useSWR(apiUrl, fetcher);
+
+  const handleSeeMoreButton = () => {
+    {
+      topicType && router.push(topicSwiperSeeMorePath[topicType]);
+    }
+  };
 
   return (
     <>
       <section className={styles["topic-swiper"]}>
+        <div
+          className={`${styles["topic-swiper__heading-loader-container"]} ${
+            !error && movies && styles["--reset"]
+          }`}
+        >
+          <div className={styles["topic-swiper__heading-container"]}>
+            <h2 className={styles["topic-swiper__heading"]}>{topicName}</h2>
+            {!error && topicType && (
+              <button
+                className={`btn ${styles["topic-swiper__more-button"]}`}
+                onClick={handleSeeMoreButton}
+              >
+                See More
+              </button>
+            )}
+          </div>
+          {!error && !movies && <Loader />}
+        </div>
+
         <div className={styles["topic-swiper__container"]}>
-          <h2 className={styles["topic-swiper__heading"]}>{topicName}</h2>
+          <div className={styles["topic-swiper__placeholder"]}>
+            <span>-</span>
+          </div>
           {error ? (
             <Error errorType="error" siteType="static" />
           ) : (
@@ -73,7 +109,6 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({
             </div>
           )}
         </div>
-        {!error && !movies && <Loader />}
       </section>
     </>
   );
