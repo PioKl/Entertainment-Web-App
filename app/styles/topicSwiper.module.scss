@@ -20,8 +20,38 @@
   &__container {
     position: absolute;
   }
-  &__heading {
+
+  &__placeholder {
+    opacity: 0;
+    height: 0;
+  }
+
+  &__heading-loader-container {
+    position: relative;
+    height: 100%;
+
+    &.--reset {
+      height: auto;
+    }
+  }
+
+  &__heading-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    column-gap: 1.6rem;
     margin-bottom: 2.5rem;
+
+    @include tablet {
+      column-gap: 2.4rem;
+    }
+  }
+  &__heading {
+    flex-grow: 11;
+  }
+  &__more-button {
+    min-width: 7.811rem;
+    max-width: 9rem;
   }
   &__swiper {
     display: grid;
