@@ -92,10 +92,12 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
             <Error errorType="wrongPage" siteType="normal" />
           ) : (
             <section className={styles.cardsTopic}>
-              <h2 className={styles["cardsTopic__title"]}>
-                Found {totalResults} results for{" "}
-                {`"${decodeURIComponent(query)}"`}
-              </h2>
+              <div className={styles["cardsTopic__title-container"]}>
+                <h2 className={styles["cardsTopic__title"]}>
+                  Found {totalResults} results for{" "}
+                  {`"${decodeURIComponent(query)}"`}
+                </h2>
+              </div>
               <div className={styles["cardsTopic__cards"]}>
                 {results &&
                   results.map((movie: any) => (
