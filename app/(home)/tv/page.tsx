@@ -14,9 +14,15 @@ export default function Tv() {
       <TopicSwiper
         topicName="Trending"
         apiUrl={endpoints.trendingTv}
+        topicType="tvTrending"
         mediaType="tv"
       />
-      <Topic topicName="Popular" apiUrl={endpoints.popularTv} mediaType="tv" />
+      <Topic
+        topicName="Popular"
+        apiUrl={endpoints.popularTv}
+        topicType="tvPopular"
+        mediaType="tv"
+      />
     </main>
   );
 }
