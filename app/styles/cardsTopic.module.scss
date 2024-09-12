@@ -3,6 +3,7 @@
 
 .cardsTopic {
   @include wrapper;
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -15,12 +16,26 @@
   @include desktopSmall {
     margin-bottom: 4rem;
   }
-  &__title {
+  &__title-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    column-gap: 1.6rem;
     margin-bottom: 2.4rem;
 
+    @include tablet {
+      column-gap: 2.4rem;
+    }
     @include desktopSmall {
       margin-bottom: 3.2rem;
     }
+  }
+  &__title {
+    flex-grow: 11;
+  }
+
+  &__more-button {
+    min-width: 7.811rem;
   }
 
   &__cards {
