@@ -40,6 +40,14 @@ export function getGenreMoviesByCategoryWithPage(id: string, page: string) {
   )}}&language=en-US&sort_by=popularity.desc&page=${page}`;
 }
 
+export function getTrendingMovies(page: string) {
+  return `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`;
+}
+
+export function getPopularMovies(page: string) {
+  return `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`;
+}
+
 //TV
 
 export function getSearchTv(query: string, page: string) {
@@ -54,4 +62,12 @@ export function getGenreTvByCategoryWithPage(id: string, page: string) {
   }&include_adult=false&with_genres=${encodeURIComponent(
     id
   )}&language=en-US&sort_by=popularity.desc&page=${page}`;
+}
+
+export function getTrendingTv(page: string) {
+  return `https://api.themoviedb.org/3/trending/tv/week?api_key=${process.env.NEXT_PUBLIC_API_KEY}&page=${page}`;
+}
+
+export function getPopularTv(page: string) {
+  return `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`;
 }
