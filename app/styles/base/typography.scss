@@ -36,3 +36,37 @@ h5 {
     color: var(--c-semi-dark-blue);
   }
 }
+
+.btn-more {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--c-greyish-blue);
+  font-weight: 700;
+  transition: all 1s ease-in-out;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0.75rem;
+    display: block;
+    width: 0;
+    height: 0.1rem;
+    background-color: var(--c-pure-white);
+    transition: all 0.5s ease-in-out;
+  }
+
+  &:before {
+    right: 0;
+  }
+
+  &:hover,
+  &:focus-visible {
+    &:after,
+    &:before {
+      width: 50%;
+    }
+    color: var(--c-red);
+  }
+}
