@@ -26,3 +26,8 @@ export const fetcherSearch = async (url: string) => {
     throw error;
   }
 };
+
+export const fetcherMedia = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => data || []);
