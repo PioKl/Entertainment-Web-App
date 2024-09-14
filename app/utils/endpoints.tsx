@@ -48,6 +48,14 @@ export function getPopularMovies(page: string) {
   return `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`;
 }
 
+export function getMovie(id: string) {
+  return `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
+
+export function getMovieCredits(id: string) {
+  return `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
+
 //TV
 
 export function getSearchTv(query: string, page: string) {
