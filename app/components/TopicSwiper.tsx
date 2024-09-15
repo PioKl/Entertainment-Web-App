@@ -48,7 +48,7 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({
             <h2 className={styles["topic-swiper__heading"]}>{topicName}</h2>
             {!error && topicType && (
               <button
-                className={`btn ${styles["topic-swiper__more-button"]}`}
+                className={`btn-more ${styles["topic-swiper__more-button"]}`}
                 onClick={handleSeeMoreButton}
               >
                 See More
