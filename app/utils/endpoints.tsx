@@ -79,3 +79,11 @@ export function getTrendingTv(page: string) {
 export function getPopularTv(page: string) {
   return `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`;
 }
+
+export function getTv(id: string) {
+  return `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
+
+export function getTvCredits(id: string) {
+  return `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
