@@ -40,7 +40,7 @@ const Topic: React.FC<TopicProps> = ({
           <h2 className={styles["cardsTopic__title"]}>{topicName}</h2>
           {!error && topicType && (
             <button
-              className={`btn ${styles["cardsTopic__more-button"]}`}
+              className={`btn-more ${styles["cardsTopic__more-button"]}`}
               onClick={handleSeeMoreButton}
             >
               See More
