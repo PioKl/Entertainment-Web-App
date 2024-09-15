@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import styles from "../styles/card.module.scss";
 import Image from "next/image";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
@@ -9,9 +10,37 @@ interface CardProps {
   mediaType?: "dynamic" | "movie" | "tv";
 }
 
+const mediaPath = {
+  moviePath: "/movies/movie/",
+  tvPath: "/tv/details/",
+};
+
+//Mapowanie mediaType na odpowiednie klucze obiektu mediaPath
+const mediaTypeToPathKey: Record<string, keyof typeof mediaPath> = {
+  movie: "moviePath",
+  tv: "tvPath",
+};
+
 const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
+  const router = useRouter();
+  const handleMediaDetails = () => {
+    //Poniżej dla search gdy pokazuje zarówno movie i tv
+    movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
+    movie.media_type === "tv" && router.push(`/tv/details/${movie.id}`);
+    //Poniżej dla wszystkich innych
+    !movie.media_type &&
+      router.push(`${mediaPath[mediaTypeToPathKey[mediaType]]}${movie.id}`);
+  };
+
   return (
-    <div className={styles["card"]}>
+    <div
+      tabIndex={0}
+      className={styles["card"]}
+      onClick={handleMediaDetails}
+      onKeyDown={(e) => {
+        e.key === "Enter" && handleMediaDetails();
+      }}
+    >
       <div
         className={styles["card__image-container"]}
         style={{

@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import styles from "../styles/cardSwiper.module.scss";
 import Image from "next/image";
 import MovieIcon from "../images/icon-category-movie.svg";
@@ -9,18 +10,42 @@ interface CardSwiperProps {
   mediaType?: "dynamic" | "movie" | "tv";
 }
 
+const mediaPath = {
+  moviePath: "/movies/movie/",
+  tvPath: "/tv/details/",
+};
+
+//Mapowanie mediaType na odpowiednie klucze obiektu mediaPath
+const mediaTypeToPathKey: Record<string, keyof typeof mediaPath> = {
+  movie: "moviePath",
+  tv: "tvPath",
+};
 const CardSwiper: React.FC<CardSwiperProps> = ({
   movie,
   mediaType = "dynamic",
 }) => {
+  const router = useRouter();
+  const handleMediaDetails = () => {
+    //Poniżej dla search gdy pokazuje zarówno movie i tv
+    movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
+    movie.media_type === "tv" && router.push(`/tv/details/${movie.id}`);
+    //Poniżej dla wszystkich innych
+    !movie.media_type &&
+      router.push(`${mediaPath[mediaTypeToPathKey[mediaType]]}${movie.id}`);
+  };
   return (
     <div
+      tabIndex={0}
       className={styles["card-swiper"]}
       //clamp jest również używany w topicSwiper.module.scss
       style={{
         position: "relative",
         height: "clamp(14rem, 5.412rem + 22.901vw, 23rem)",
         width: "100%",
+      }}
+      onClick={handleMediaDetails}
+      onKeyDown={(e) => {
+        e.key === "Enter" && handleMediaDetails();
       }}
     >
       {(movie.backdrop_path || movie.poster_path) && (
