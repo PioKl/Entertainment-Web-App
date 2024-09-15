@@ -49,3 +49,28 @@ export function getMediaByTopicType(fetchFunction: (page: string) => string) {
     }
   };
 }
+
+export function getMediaDetails(
+  fetchFunctionMedia: (id: string) => string,
+  fetchFunctionCrew: (id: string) => string
+) {
+  return async function GET(
+    request: Request,
+    { params }: { params: { id: string } }
+  ) {
+    const id = params.id;
+
+    try {
+      const [media, crew] = await Promise.all([
+        fetch(fetchFunctionMedia(id)).then((res) => res.json()),
+        fetch(fetchFunctionCrew(id)).then((res) => res.json()),
+      ]);
+      return NextResponse.json({ media, crew });
+    } catch (error) {
+      return NextResponse.json(
+        { error: "error fetching data from TMdb" },
+        { status: 500 }
+      );
+    }
+  };
+}
