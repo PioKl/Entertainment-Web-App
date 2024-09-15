@@ -2,11 +2,13 @@
 @use "./base/mixins.scss" as *;
 
 .card {
+  cursor: pointer;
+
   &__image-container {
     height: clamp(11rem, 7.735rem + 8.707vw, 17.4rem);
     margin-bottom: 0.8rem;
     background-color: var(--c-semi-dark-blue);
-    border-radius: 8px;
+    border-radius: 0.8rem;
   }
   &__image {
     border-radius: inherit;
