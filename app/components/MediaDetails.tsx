@@ -4,6 +4,9 @@ import useSWR from "swr";
 import { fetcherMedia } from "@/app/utils/fetcher";
 import Loader from "@/app/components/Loader";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/scss";
 
 interface MediaDetailsProps {
   params: {
@@ -44,18 +47,75 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
               height={530}
             />
           </div>
-          <div>
-            <h2>{media.original_title}</h2>
-            <h3>{media.release_date}</h3>
-            <span>{media.vote_average}</span>
-            <span>Votes: {media.vote_count}</span>
-            <span>Length: {media.runtime}</span>
-            <span>Status: {media.status}</span>
-            <span>Language: {media.spoken_languages[0].english_name}</span>
-            {media.genres.map((genre: any) => (
-              <span key={genre.id}>{genre.name}</span>
-            ))}
-            <p>{media.overview}</p>
+          <div className={styles["media__details"]}>
+            <div className={styles["media__title-container"]}>
+              <h2 className={styles["media__title"]}>{media.original_title}</h2>
+              <span className={styles["media__release-date"]}>
+                {`(${media.release_date.substring(0, 4)})`}
+              </span>
+            </div>
+            <div className={styles["media__quick-info"]}>
+              <span className={styles["media__full-release-date"]}>
+                Release date: {media.release_date}
+              </span>
+              <span className={styles["media__language"]}>
+                Language: {media.spoken_languages[0].english_name}
+              </span>
+              <span className={styles["media__length"]}>
+                Length: {media.runtime}
+              </span>
+              <span className={styles["media__status"]}>
+                Status: {media.status}
+              </span>
+            </div>
+            <div className={styles["media__genre-container"]}>
+              {media.genres.map((genre: any) => (
+                <span className={styles["media__genre"]} key={genre.id}>
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+            <div className={styles["media__overview-container"]}>
+              <p>{media.overview}</p>
+            </div>
+
+            <div className={styles["media__cast"]}>
+              <Swiper
+                grabCursor={true}
+                slidesPerView={5.5}
+                spaceBetween={20}
+                centeredSlides={false}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination]}
+              >
+                {crew.cast.map((cast: any) => (
+                  <SwiperSlide key={cast.id}>
+                    <div
+                      style={{
+                        position: "relative",
+                        height: "175px",
+                        width: "100%",
+                      }}
+                    >
+                      {cast.profile_path && (
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w780/${cast.profile_path}`}
+                          alt="profile"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          fill
+                          style={{ objectFit: "cover" }}
+                          priority={true}
+                        />
+                      )}
+                    </div>
+
+                    <span>{cast.name}</span>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
         </section>
       )}
