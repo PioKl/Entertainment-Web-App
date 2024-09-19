@@ -81,20 +81,15 @@
   &__rating-container {
     display: flex;
     align-items: center;
-    //flex-flow: row nowrap;
   }
 
   &__single-chart {
     width: 10rem;
     margin-right: 1rem;
-    //justify-content: space-around;
   }
 
   &__circular-chart {
     display: block;
-    //margin: 10px auto;
-    /*     max-width: 12.5rem;
-    max-height: 12.5rem; */
   }
 
   &__circle-bg {
@@ -108,7 +103,6 @@
     stroke-width: 2.8;
     stroke-linecap: round;
     animation: progress 1s ease-out forwards;
-    //stroke-dasharray: 77 100;
   }
 
   @keyframes progress {
