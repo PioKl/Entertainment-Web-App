@@ -7,6 +7,9 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
 interface MediaDetailsProps {
   params: {
@@ -50,23 +53,64 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
           <div className={styles["media__details"]}>
             <div className={styles["media__title-container"]}>
               <h2 className={styles["media__title"]}>{media.original_title}</h2>
-              <span className={styles["media__release-date"]}>
-                {`(${media.release_date.substring(0, 4)})`}
-              </span>
+              {media.release_date && (
+                <span className={styles["media__release-date"]}>
+                  {`(${media.release_date.substring(0, 4)})`}
+                </span>
+              )}
             </div>
             <div className={styles["media__quick-info"]}>
               <span className={styles["media__full-release-date"]}>
                 Release date: {media.release_date}
               </span>
-              <span className={styles["media__language"]}>
-                Language: {media.spoken_languages[0].english_name}
-              </span>
+              {media.spoken_languages.length > 0 && (
+                <span className={styles["media__language"]}>
+                  {" "}
+                  Language: {media.spoken_languages[0].english_name}
+                </span>
+              )}
               <span className={styles["media__length"]}>
                 Length: {media.runtime}
               </span>
               <span className={styles["media__status"]}>
                 Status: {media.status}
               </span>
+            </div>
+            <div className={styles["media__rating-container"]}>
+              <div className={styles["media__single-chart"]}>
+                <svg
+                  viewBox="0 0 36 36"
+                  className={`${styles["media__circular-chart"]} ${
+                    styles[
+                      `${
+                        media.vote_average * 10 < 40
+                          ? "red"
+                          : media.vote_average * 10 < 70
+                          ? "orange"
+                          : "green"
+                      }`
+                    ]
+                  }`}
+                >
+                  <path
+                    className={styles["media__circle-bg"]}
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <path
+                    className={styles["media__circle"]}
+                    strokeDasharray={`${`${media.vote_average * 10}, 100`}`}
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <text
+                    x="18"
+                    y="20.35"
+                    className={styles["media__percentage"]}
+                  >
+                    {parseFloat((media.vote_average * 10).toFixed(1))}%
+                  </text>
+                </svg>
+              </div>
+              <span>Users score</span>
             </div>
             <div className={styles["media__genre-container"]}>
               {media.genres.map((genre: any) => (
