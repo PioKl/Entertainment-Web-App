@@ -25,14 +25,18 @@
   &__stars-container {
     display: flex;
     justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
   &__star {
-    &.--empty {
-      color: var(--c-pure-white);
-    }
+    width: 3rem;
+    height: 3rem;
     &.--full {
-      color: gold;
+      fill: gold;
+    }
+    &.--half {
+      fill: gold;
     }
   }
 
@@ -40,10 +44,9 @@
     margin: auto;
   }
 
-  &__cast {
-    display: grid;
+  &__details {
+    flex: 1;
   }
-
   &__title-container,
   &__quick-info,
   &__genre-container,
@@ -67,7 +70,17 @@
   &__quick-info,
   &__genre-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  &__quick-info,
+  &__rating-container {
+    span {
+      padding: 0.5rem;
+      border: 0.1rem solid var(--c-pure-white);
+      border-radius: 0.8rem;
+    }
   }
 
   &__genre {
@@ -94,7 +107,7 @@
 
   &__circle-bg {
     fill: none;
-    stroke: #eee;
+    stroke: var(--c-semi-dark-blue);
     stroke-width: 3.8;
   }
 
@@ -127,5 +140,12 @@
     fill: var(--c-pure-white);
     font-size: 0.5em;
     text-anchor: middle;
+  }
+
+  &__cast {
+    display: grid;
+  }
+  &__cast-image-container {
+    margin-bottom: 0.5rem;
   }
 }
