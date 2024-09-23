@@ -7,9 +7,9 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
-import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
+import HalfStar from "@/app/images/half-star.svg";
+import Star from "@/app/images/star.svg";
+import EmptyStar from "@/app/images/empty-star.svg";
 
 interface MediaDetailsProps {
   params: {
@@ -32,9 +32,38 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
 
   const results = data || [];
   const loading = !data && !error;
-  const { media, crew } = results;
+  const { media = {}, crew = [] } = results;
 
-  console.log(results);
+  const renderStars = (vote_average: number) => {
+    const rating = (vote_average * 5) / 10; // Przekształcenie oceny z 0-10 na 0-5, czyli od 0 do 5, co oznacza od 0 do 5 gwiazdek
+    const fullStars = Math.floor(rating); // Pełne gwiazdki
+    const hasHalfStar = rating - fullStars >= 0.5; // Sprawdzanie, czy jest połówkowa gwiazdka, czyli np. 3.1 nie da połówki, ale od 3.5 już da, jeszcze tak to można zapisać rating % 1 >= 0.5
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0); // Puste gwiazdki
+
+    return (
+      <>
+        {/* //Szybka tablica z zawartością x elementów, _ to niepotrzebny parametr,, i index elementu */}
+        {Array.from({ length: fullStars }, (_, i) => (
+          <Star
+            className={`${styles["media__star"]} ${styles["--full"]}`}
+            key={i}
+          />
+        ))}
+        {hasHalfStar && (
+          <HalfStar
+            className={`${styles["media__star"]} ${styles["--half"]}`}
+            key={"half-star"}
+          />
+        )}
+        {Array.from({ length: emptyStars }, (_, i) => (
+          <EmptyStar
+            className={`${styles["media__star"]} ${styles["--empty"]}`}
+            key={i}
+          />
+        ))}
+      </>
+    );
+  };
 
   return (
     <>
@@ -49,32 +78,63 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
               width={350}
               height={530}
             />
+            {media.vote_average && (
+              <div className={styles["media__stars-container"]}>
+                {renderStars(media.vote_average)}
+              </div>
+            )}
           </div>
           <div className={styles["media__details"]}>
             <div className={styles["media__title-container"]}>
-              <h2 className={styles["media__title"]}>{media.original_title}</h2>
-              {media.release_date && (
+              {(media.original_title || media.original_name) && (
+                <h2 className={styles["media__title"]}>
+                  {mediaType === "movie"
+                    ? media.original_title
+                    : mediaType === "tv" && media.original_name}
+                </h2>
+              )}
+              {(media.release_date || media.first_air_date) && (
                 <span className={styles["media__release-date"]}>
-                  {`(${media.release_date.substring(0, 4)})`}
+                  {mediaType === "movie"
+                    ? `(${media.release_date.substring(0, 4)})`
+                    : mediaType === "tv" &&
+                      `(${media.first_air_date.substring(0, 4)})`}
                 </span>
               )}
             </div>
+            {(media.original_title || media.original_name) && media.tagline && (
+              <div className={styles["media__tagline-container"]}>
+                <span>{media.tagline}</span>
+              </div>
+            )}
             <div className={styles["media__quick-info"]}>
-              <span className={styles["media__full-release-date"]}>
-                Release date: {media.release_date}
-              </span>
+              {(media.release_date || media.first_air_date) && (
+                <span className={styles["media__full-release-date"]}>
+                  Release date:{" "}
+                  {mediaType === "movie"
+                    ? media.release_date
+                    : mediaType === "tv" && media.first_air_date}
+                </span>
+              )}
               {media.spoken_languages.length > 0 && (
                 <span className={styles["media__language"]}>
                   {" "}
                   Language: {media.spoken_languages[0].english_name}
                 </span>
               )}
-              <span className={styles["media__length"]}>
-                Length: {media.runtime}
-              </span>
-              <span className={styles["media__status"]}>
-                Status: {media.status}
-              </span>
+              {media.runtime && (
+                <span className={styles["media__length"]}>
+                  Length:{" "}
+                  {`${Math.floor(media.runtime / 60)}h ${
+                    media.runtime % 60
+                  }min`}
+                </span>
+              )}
+              {media.status && (
+                <span className={styles["media__status"]}>
+                  Status: {media.status}
+                </span>
+              )}
             </div>
             <div className={styles["media__rating-container"]}>
               <div className={styles["media__single-chart"]}>
@@ -112,31 +172,59 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
               </div>
               <span>Users score</span>
             </div>
-            <div className={styles["media__genre-container"]}>
-              {media.genres.map((genre: any) => (
-                <span className={styles["media__genre"]} key={genre.id}>
-                  {genre.name}
-                </span>
-              ))}
-            </div>
-            <div className={styles["media__overview-container"]}>
-              <p>{media.overview}</p>
-            </div>
+            {media.genres && (
+              <div className={styles["media__genre-container"]}>
+                {media.genres.map((genre: any) => (
+                  <span className={styles["media__genre"]} key={genre.id}>
+                    {genre.name}
+                  </span>
+                ))}
+              </div>
+            )}
+            {media.overview && (
+              <div className={styles["media__overview-container"]}>
+                <p>{media.overview}</p>
+              </div>
+            )}
 
             <div className={styles["media__cast"]}>
               <Swiper
                 grabCursor={true}
-                slidesPerView={5.5}
+                slidesPerView={2.5}
                 spaceBetween={20}
                 centeredSlides={false}
                 pagination={{
                   clickable: true,
                 }}
                 modules={[Pagination]}
+                breakpoints={{
+                  400: {
+                    slidesPerView: 3.5,
+                  },
+                  500: {
+                    slidesPerView: 4.5,
+                  },
+                  650: {
+                    slidesPerView: 5.5,
+                  },
+                  768: {
+                    slidesPerView: 2.5,
+                  },
+                  870: {
+                    slidesPerView: 3.5,
+                  },
+                  1000: {
+                    slidesPerView: 4.5,
+                  },
+                  1280: {
+                    slidesPerView: 5.5,
+                  },
+                }}
               >
                 {crew.cast.map((cast: any) => (
                   <SwiperSlide key={cast.id}>
                     <div
+                      className={styles["media__cast-image-container"]}
                       style={{
                         position: "relative",
                         height: "175px",
@@ -149,17 +237,31 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                           alt="profile"
                           sizes="(max-width: 768px) 100vw, 33vw"
                           fill
-                          style={{ objectFit: "cover" }}
+                          style={{ objectFit: "contain" }}
                           priority={true}
                         />
                       )}
                     </div>
-
-                    <span>{cast.name}</span>
+                    <span className={styles["media__cast-name"]}>
+                      {cast.name}
+                    </span>
                   </SwiperSlide>
                 ))}
               </Swiper>
             </div>
+            {media.homepage && (
+              <div className={styles["media__links"]}>
+                <button className={`btn ${styles["media__link"]}`}>
+                  <a
+                    href={media.homepage}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Website
+                  </a>
+                </button>
+              </div>
+            )}
           </div>
         </section>
       )}
