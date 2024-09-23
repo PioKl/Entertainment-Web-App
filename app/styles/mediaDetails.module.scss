@@ -47,7 +47,7 @@
   &__details {
     flex: 1;
   }
-  &__title-container,
+  &__tagline-container,
   &__quick-info,
   &__genre-container,
   &__overview-container,
@@ -59,6 +59,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+
+  &__tagline-container {
+    color: var(--c-greyish-blue);
+    span {
+      font-size: var(--h-f-xs);
+    }
   }
 
   &__release-date {
@@ -144,8 +151,26 @@
 
   &__cast {
     display: grid;
+    margin-bottom: 5rem;
   }
   &__cast-image-container {
+    display: grid;
+    place-items: center;
     margin-bottom: 0.5rem;
+    &::after {
+      content: "";
+      display: block;
+      background-image: url("../images/user.svg");
+      width: 6.4rem;
+      height: 6.4rem;
+    }
+  }
+  &__links {
+    display: flex;
+    gap: 1rem;
+  }
+  &__link {
+    flex: initial;
+    padding: 1rem 1.6rem;
   }
 }
