@@ -2,15 +2,22 @@
 @use "./base/mixins.scss" as *;
 
 .media {
-  @include wrapper;
   display: flex;
   flex-direction: column;
   flex: 1;
   column-gap: 8rem;
 
   @include tablet {
-    @include wrapperRemove;
     flex-direction: row;
+  }
+
+  &__poster,
+  &__tagline-container,
+  &__quick-info,
+  &__genre-container,
+  &__overview-container,
+  &__rating-container {
+    margin-bottom: 2.5rem;
   }
 
   &__image-container {
@@ -19,6 +26,14 @@
     @include tablet {
       min-width: 35rem;
       margin-bottom: 0;
+    }
+  }
+
+  &__image {
+    margin: auto;
+
+    @include tablet {
+      border-radius: 0.8rem;
     }
   }
 
@@ -40,23 +55,18 @@
     }
   }
 
-  &__image {
-    margin: auto;
-  }
-
   &__details {
+    @include wrapper;
     flex: 1;
-  }
-  &__tagline-container,
-  &__quick-info,
-  &__genre-container,
-  &__overview-container,
-  &__rating-container {
-    margin-bottom: 2.5rem;
+
+    @include tablet {
+      @include wrapperRemove;
+    }
   }
 
   &__title-container {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
   }
@@ -151,12 +161,13 @@
 
   &__cast {
     display: grid;
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
   }
   &__cast-image-container {
     display: grid;
     place-items: center;
     margin-bottom: 0.5rem;
+
     &::after {
       content: "";
       display: block;
@@ -165,6 +176,7 @@
       height: 6.4rem;
     }
   }
+
   &__links {
     display: flex;
     gap: 1rem;
