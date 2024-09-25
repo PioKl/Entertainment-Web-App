@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import styles from "@/app/styles/mediaDetails.module.scss";
 import useSWR from "swr";
 import { fetcherMedia } from "@/app/utils/fetcher";
@@ -10,6 +11,8 @@ import "swiper/scss";
 import HalfStar from "@/app/images/half-star.svg";
 import Star from "@/app/images/star.svg";
 import EmptyStar from "@/app/images/empty-star.svg";
+import { breakpoints } from "@/app/utils/breakPoints";
+import { emToPixels } from "@/app/utils/emToPixels";
 
 interface MediaDetailsProps {
   params: {
@@ -33,6 +36,7 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
   const results = data || [];
   const loading = !data && !error;
   const { media = {}, crew = [] } = results;
+  console.log(results);
 
   const renderStars = (vote_average: number) => {
     const rating = (vote_average * 5) / 10; // Przekształcenie oceny z 0-10 na 0-5, czyli od 0 do 5, co oznacza od 0 do 5 gwiazdek
@@ -65,25 +69,69 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
     );
   };
 
+  //Sprawdzenie, czy nastąpiła zmiana wymaganej rozdzielczości, jeśli tak to zmieni się na true
+  const [imageResize, setImageResize] = useState(false);
+
+  useEffect(() => {
+    const handleImageResize = () => {
+      setImageResize(window.innerWidth >= emToPixels(breakpoints.bpTablet));
+    };
+
+    // Wywołanie funkcji, aby sprawdzić początkowy rozmiar
+    handleImageResize();
+
+    //Nasłuchiwanie zmian przy resize
+    window.addEventListener("resize", handleImageResize);
+
+    //Usunięcie nasłuchiwania przy odmontowanie
+    return () => {
+      window.removeEventListener("resize", handleImageResize);
+    };
+  }, []);
   return (
     <>
       {loading && <Loader />}
       {!loading && (
         <section className={styles.media}>
-          <div className={styles["media__image-container"]}>
-            <Image
-              src={`https://image.tmdb.org/t/p/w780/${media.poster_path}`}
-              className={styles["media__image"]}
-              alt="poster"
-              width={350}
-              height={530}
-            />
+          <div className={styles["media__poster"]}>
+            <div
+              className={styles["media__image-container"]}
+              style={
+                imageResize
+                  ? {}
+                  : {
+                      position: "relative",
+                      height: "clamp(22.5rem, -3.74rem + 69.975vw, 50rem)",
+                      width: "100%",
+                    }
+              }
+            >
+              {imageResize ? (
+                <Image
+                  src={`https://image.tmdb.org/t/p/w780/${media.poster_path}`}
+                  className={styles["media__image"]}
+                  alt="poster"
+                  width={350}
+                  height={530}
+                />
+              ) : (
+                <Image
+                  src={`https://image.tmdb.org/t/p/original/${media.backdrop_path}`}
+                  className={styles["media__image"]}
+                  alt="poster"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  priority={true}
+                />
+              )}
+            </div>
             {media.vote_average && (
               <div className={styles["media__stars-container"]}>
                 {renderStars(media.vote_average)}
               </div>
             )}
           </div>
+
           <div className={styles["media__details"]}>
             <div className={styles["media__title-container"]}>
               {(media.original_title || media.original_name) && (
@@ -233,6 +281,7 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                     >
                       {cast.profile_path && (
                         <Image
+                          className={styles["media__cast-image"]}
                           src={`https://image.tmdb.org/t/p/w780/${cast.profile_path}`}
                           alt="profile"
                           sizes="(max-width: 768px) 100vw, 33vw"
