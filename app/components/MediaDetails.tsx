@@ -36,7 +36,6 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
   const results = data || [];
   const loading = !data && !error;
   const { media = {}, crew = [] } = results;
-  console.log(results);
 
   const renderStars = (vote_average: number) => {
     const rating = (vote_average * 5) / 10; // Przekształcenie oceny z 0-10 na 0-5, czyli od 0 do 5, co oznacza od 0 do 5 gwiazdek
