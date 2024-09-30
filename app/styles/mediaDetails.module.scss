@@ -6,6 +6,7 @@
   flex-direction: column;
   flex: 1;
   column-gap: 8rem;
+  margin-bottom: 4rem;
 
   @include tablet {
     flex-direction: row;
@@ -16,6 +17,7 @@
   &__quick-info,
   &__genre-container,
   &__overview-container,
+  &__cast,
   &__rating-container {
     margin-bottom: 2.5rem;
   }
@@ -159,10 +161,16 @@
     text-anchor: middle;
   }
 
+  &__overview-container {
+    &__heading {
+      margin-bottom: 1.6rem;
+    }
+  }
+
   &__cast {
     display: grid;
-    margin-bottom: 3.5rem;
   }
+
   &__cast-image-container {
     display: grid;
     place-items: center;
@@ -177,12 +185,34 @@
     }
   }
 
+  &__cast-role {
+    display: grid;
+    gap: 0.5rem;
+  }
+
   &__links {
     display: flex;
     gap: 1rem;
   }
   &__link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     flex: initial;
     padding: 1rem 1.6rem;
+    &:hover {
+      .media__link-icon path {
+        fill: var(--c-semi-dark-blue);
+        stroke: var(--c-semi-dark-blue);
+      }
+    }
+  }
+  &__link-icon {
+    width: 2.8rem;
+    height: 2.8rem;
+    & path {
+      fill: var(--c-pure-white);
+      stroke: var(--c-pure-white);
+    }
   }
 }
