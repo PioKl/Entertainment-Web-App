@@ -11,6 +11,7 @@ import "swiper/scss";
 import HalfStar from "@/app/images/half-star.svg";
 import Star from "@/app/images/star.svg";
 import EmptyStar from "@/app/images/empty-star.svg";
+import IconLink from "@/app/images/icon-link.svg";
 import { breakpoints } from "@/app/utils/breakPoints";
 import { emToPixels } from "@/app/utils/emToPixels";
 
@@ -124,7 +125,7 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                 />
               )}
             </div>
-            {media.vote_average && (
+            {media.vote_average >= 0 && (
               <div className={styles["media__stars-container"]}>
                 {renderStars(media.vote_average)}
               </div>
@@ -230,6 +231,9 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
             )}
             {media.overview && (
               <div className={styles["media__overview-container"]}>
+                <h3 className={styles["media__overview-container__heading"]}>
+                  Overview
+                </h3>
                 <p>{media.overview}</p>
               </div>
             )}
@@ -290,9 +294,20 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                         />
                       )}
                     </div>
-                    <span className={styles["media__cast-name"]}>
-                      {cast.name}
-                    </span>
+                    {cast.name && (
+                      <div className={styles["media__cast-role"]}>
+                        <span className={styles["media__cast-role__name"]}>
+                          {cast.name}
+                        </span>
+                        {cast.character && (
+                          <span
+                            className={styles["media__cast-role__character"]}
+                          >
+                            {cast.character}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -307,6 +322,7 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                   >
                     Website
                   </a>
+                  <IconLink className={styles["media__link-icon"]} />
                 </button>
               </div>
             )}
