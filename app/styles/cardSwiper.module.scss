@@ -4,19 +4,22 @@
 .card-swiper {
   position: relative;
   margin: 0.2rem;
+  border-radius: 0.8rem;
+  background-color: var(--c-semi-dark-blue);
   &:focus {
     outline: none;
     box-shadow: 0 0 0 0.2rem var(--c-pure-white);
-    border-radius: 0.8rem;
   }
 
   &__image {
+    z-index: 2;
     border-radius: 0.8rem;
     background-color: var(--c-semi-dark-blue);
   }
 
   &__bookmark {
     position: absolute;
+    z-index: 3;
     right: 0;
     display: grid;
     place-items: center;
@@ -47,6 +50,7 @@
 
   &__quick-info {
     position: absolute;
+    z-index: 4;
     bottom: 0;
     margin: 1.6rem;
 
