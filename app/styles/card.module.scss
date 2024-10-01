@@ -9,14 +9,31 @@
     margin-bottom: 0.8rem;
     background-color: var(--c-semi-dark-blue);
     border-radius: 0.8rem;
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: clamp(2.5rem, 0.115rem + 6.361vw, 5rem);
+      height: clamp(2.5rem, 0.115rem + 6.361vw, 5rem);
+      background-image: url("../images/image-picture.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
   }
   &__image {
+    z-index: 2;
     border-radius: inherit;
     height: inherit;
   }
 
   &__bookmark {
     position: absolute;
+    z-index: 3;
     right: 0;
     display: grid;
     place-items: center;
