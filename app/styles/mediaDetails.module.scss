@@ -23,7 +23,22 @@
   }
 
   &__image-container {
+    position: relative;
     margin-bottom: 2.5rem;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: 10rem;
+      height: 10rem;
+      background-image: url("../images/image-picture.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
 
     @include tablet {
       min-width: 35rem;
@@ -32,6 +47,8 @@
   }
 
   &__image {
+    position: relative;
+    z-index: 2;
     margin: auto;
 
     @include tablet {
