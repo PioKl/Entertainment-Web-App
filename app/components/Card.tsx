@@ -61,7 +61,13 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
           />
         )}
         {/* w przyszlości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
-        <button type="button" className={`${styles.card__bookmark}`}>
+        <button
+          type="button"
+          className={`${styles.card__bookmark}`}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <BookMarkIcon className={styles["card__bookmark-icon"]} />
         </button>
       </div>
