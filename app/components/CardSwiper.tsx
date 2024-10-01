@@ -62,7 +62,13 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
         />
       )}
       {/* W przyszłości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
-      <button type="button" className={styles["card-swiper__bookmark"]}>
+      <button
+        type="button"
+        className={styles["card-swiper__bookmark"]}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <BookMarkIcon className={styles["card-swiper__bookmark-icon"]} />
       </button>
 
