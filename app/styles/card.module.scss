@@ -4,6 +4,13 @@
 .card {
   cursor: pointer;
 
+  &:hover,
+  &:focus-visible {
+    .card__video-container {
+      visibility: visible;
+    }
+  }
+
   &__image-container {
     height: clamp(11rem, 7.735rem + 8.707vw, 17.4rem);
     margin-bottom: 0.8rem;
@@ -24,6 +31,19 @@
       background-size: 100%;
       background-repeat: no-repeat;
     }
+
+    &.--play-active {
+      &:after {
+        visibility: hidden;
+      }
+    }
+  }
+  &__iframe {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    border: none;
+    border-radius: inherit;
   }
   &__image {
     z-index: 2;
@@ -31,13 +51,60 @@
     height: inherit;
   }
 
-  &__bookmark {
+  &__video-container {
     position: absolute;
-    z-index: 3;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    border-radius: inherit;
+    visibility: hidden;
+
+    &.--play-active {
+      display: none;
+    }
+  }
+
+  &__play-button {
+    position: relative;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 2.85rem;
+    background-color: rgba(var(--c-pure-white-rgba), 0.25);
+    cursor: pointer;
+  }
+  &__play-icon {
+    margin-right: 1.9rem;
+  }
+  &__play-span {
+    margin-right: 2.4rem;
+    font-size: var(--h-f-xs);
+    font-weight: 500;
+    color: var(--c-pure-white);
+  }
+
+  &__options-buttons {
+    position: absolute;
+    z-index: 6;
     right: 0;
     display: grid;
+    gap: 0.8rem;
+  }
+
+  &__bookmark {
+    display: grid;
     place-items: center;
-    margin: 0.8rem;
+    margin: 0.8rem 0.8rem 0 0;
     padding: 1rem;
     background-color: rgba(var(--c-dark-blue-rgb), 0.5);
     border-radius: 2rem;
@@ -57,6 +124,38 @@
 
     &.--active {
       .card__bookmark-icon path {
+        fill: var(--c-pure-white);
+      }
+    }
+  }
+
+  &__info-button {
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-pure-white);
+      .card__info-icon path {
+        fill: var(--c-dark-blue);
+      }
+    }
+
+    &.--active {
+      .card__info-icon path {
+        fill: var(--c-pure-white);
+      }
+    }
+  }
+
+  &__close-button {
+    &:hover,
+    &:focus-visible {
+      background-color: var(--c-pure-white);
+      .card__close-icon path {
+        fill: var(--c-dark-blue);
+      }
+    }
+
+    &.--active {
+      .card__close-icon path {
         fill: var(--c-pure-white);
       }
     }
