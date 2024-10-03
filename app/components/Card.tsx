@@ -47,13 +47,16 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
   };
+
   return (
     <div
       tabIndex={0}
       className={styles["card"]}
-      onClick={handlePlayMovie}
+      onClick={data && data.length > 0 ? handlePlayMovie : undefined}
       onKeyDown={(e) => {
-        e.key === "Enter" && handlePlayMovie();
+        e.key === "Enter" && data && data.length > 0
+          ? handlePlayMovie()
+          : undefined;
       }}
     >
       <div
@@ -112,19 +115,24 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         >
           {!playMovie && (
             <>
-              <button type="button" className={`${styles.card__bookmark}`}>
+              <button
+                type="button"
+                className={`${styles.card__bookmark}`}
+                title="bookmark"
+              >
                 <BookMarkIcon className={styles["card__bookmark-icon"]} />
               </button>
               <button
                 type="button"
                 className={`btn-option ${styles["card__info-button"]}`}
                 onClick={handleMediaDetails}
+                title="details"
               >
                 <IconInfo className={styles["card__info-icon"]} />
               </button>
             </>
           )}
-          {playMovie && (
+          {playMovie && data && data.length > 0 && (
             <button
               type="button"
               className={`btn-option ${styles["card__close-button"]}`}
