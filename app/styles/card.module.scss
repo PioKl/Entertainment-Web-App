@@ -129,32 +129,19 @@
     }
   }
 
-  &__info-button {
-    &:hover,
-    &:focus-visible {
-      background-color: var(--c-pure-white);
-      .card__info-icon path {
-        fill: var(--c-dark-blue);
-      }
-    }
-
-    &.--active {
-      .card__info-icon path {
-        fill: var(--c-pure-white);
-      }
-    }
-  }
-
+  &__info-button,
   &__close-button {
     &:hover,
     &:focus-visible {
       background-color: var(--c-pure-white);
+      .card__info-icon path,
       .card__close-icon path {
         fill: var(--c-dark-blue);
       }
     }
 
     &.--active {
+      .card__info-icon path,
       .card__close-icon path {
         fill: var(--c-pure-white);
       }
