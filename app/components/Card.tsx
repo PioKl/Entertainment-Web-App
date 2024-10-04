@@ -6,6 +6,7 @@ import styles from "../styles/card.module.scss";
 import Image from "next/image";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import IconInfo from "@/app/images/icon-info.svg";
+import IconNext from "@/app/images/icon-next.svg";
 import IconClose from "@/app/images/icon-close.svg";
 import IconPlay from "../images/icon-play.svg";
 import MovieIcon from "../images/icon-category-movie.svg";
@@ -30,6 +31,7 @@ const mediaTypeToPathKey: Record<string, keyof typeof mediaPath> = {
 const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
   const router = useRouter();
   const [playMovie, setPlayMovie] = useState(false);
+  const [trailerNumber, setTrailerNumber] = useState(0);
   const handleMediaDetails = () => {
     //Poniżej dla search gdy pokazuje zarówno movie i tv
     movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
@@ -44,8 +46,24 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
     fetcher
   );
 
+  console.log(data);
+
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
+  };
+
+  const handlePreviousTrailer = () => {
+    setTrailerNumber((prevId) => {
+      const newTrailerNumber = (prevId - 1 + data.length) % data.length;
+      return newTrailerNumber;
+    });
+  };
+
+  const handleNextTrailer = () => {
+    setTrailerNumber((prevId) => {
+      const newTrailerNumber = (prevId + 1) % data.length;
+      return newTrailerNumber;
+    });
   };
 
   return (
@@ -71,7 +89,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
           (playMovie && data[0] ? (
             <iframe
               className={styles["card__iframe"]}
-              src={`https://www.youtube.com/embed/${data[0].key}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${data[trailerNumber].key}?autoplay=1`}
               allow="fullscreen"
               onClick={(e) => {
                 e.stopPropagation();
@@ -101,9 +119,46 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
               handlePlayMovie();
             }}
           >
-            <button type="button" className={styles["card__play-button"]}>
-              <IconPlay className={styles["card__play-icon"]} />
-              <span className={styles["card__play-span"]}>Play</span>
+            <div className={styles["card__play-button-container"]}>
+              <button type="button" className={styles["card__play-button"]}>
+                <IconPlay className={styles["card__play-icon"]} />
+                <span className={styles["card__play-span"]}>Play</span>
+              </button>
+              <span className={styles["card__trailer-name"]}>
+                {data[trailerNumber].name}
+              </span>
+            </div>
+          </div>
+        )}
+        {!playMovie && data && data.length > 0 && (
+          <div
+            className={styles["card__choose-trailer"]}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <button
+              className={`${styles["card__choose-trailer__button"]} ${styles["--previous"]}`}
+              onClick={handlePreviousTrailer}
+              onKeyDown={(e) => {
+                e.stopPropagation();
+                e.key === "Enter" && handlePreviousTrailer;
+              }}
+            >
+              <IconNext />
+            </button>
+            <span className={styles["card__choose-trailer__number"]}>
+              {trailerNumber + 1} / {data.length}
+            </span>
+            <button
+              className={`${styles["card__choose-trailer__button"]} ${styles["--next"]}`}
+              onClick={handleNextTrailer}
+              onKeyDown={(e) => {
+                e.stopPropagation();
+                e.key === "Enter" && handleNextTrailer;
+              }}
+            >
+              <IconNext />
             </button>
           </div>
         )}
