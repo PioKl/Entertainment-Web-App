@@ -68,13 +68,22 @@
       display: none;
     }
   }
-
-  &__play-button {
+  &__play-button-container {
     position: relative;
     z-index: 4;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+
+    @include tablet {
+      top: 75%;
+      transform: translate(-50%, -75%);
+    }
+  }
+  &__play-button {
     display: flex;
     align-items: center;
     padding: 0.9rem;
@@ -84,21 +93,77 @@
     cursor: pointer;
   }
   &__play-icon {
-    margin-right: 1.9rem;
+    @include tablet {
+      margin-right: 1.9rem;
+    }
   }
   &__play-span {
-    margin-right: 2.4rem;
+    display: none;
     font-size: var(--h-f-xs);
     font-weight: 500;
     color: var(--c-pure-white);
+
+    @include tablet {
+      display: flex;
+      margin-right: 2.4rem;
+    }
+  }
+  &__trailer-name {
+    //max-width: clamp(14rem, 5.327rem + 23.129vw, 31rem);
+    width: 100%;
+    white-space: nowrap;
+    padding: 0.5rem;
+    background-color: rgba(var(--c-pure-white-rgba), 0.25);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+
+    @include desktopSmall {
+      //max-width: initial;
+      white-space: initial;
+    }
+  }
+
+  &__options-buttons,
+  &__choose-trailer {
+    position: absolute;
+    z-index: 6;
+    gap: 0.8rem;
   }
 
   &__options-buttons {
-    position: absolute;
-    z-index: 6;
     right: 0;
     display: grid;
-    gap: 0.8rem;
+  }
+  &__choose-trailer {
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-block: 0.8rem;
+    background-color: rgba(var(--c-dark-blue-rgb), 0.5);
+
+    &__button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &.--previous {
+        transform: rotate(180deg);
+
+        &:active {
+          transform: rotate(180deg) scale(1.1);
+        }
+      }
+
+      &:active {
+        transform: scale(1.1);
+      }
+    }
+
+    &__number {
+      width: 5rem;
+      text-align: center;
+    }
   }
 
   &__bookmark {
