@@ -133,28 +133,32 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
           </div>
 
           <div className={styles["media__details"]}>
-            <div className={styles["media__title-container"]}>
-              {(media.original_title || media.original_name) && (
-                <h2 className={styles["media__title"]}>
-                  {mediaType === "movie"
-                    ? media.original_title
-                    : mediaType === "tv" && media.original_name}
-                </h2>
-              )}
-              {(media.release_date || media.first_air_date) && (
-                <span className={styles["media__release-date"]}>
-                  {mediaType === "movie"
-                    ? `(${media.release_date.substring(0, 4)})`
-                    : mediaType === "tv" &&
-                      `(${media.first_air_date.substring(0, 4)})`}
-                </span>
-              )}
-            </div>
-            {(media.original_title || media.original_name) && media.tagline && (
-              <div className={styles["media__tagline-container"]}>
-                <span>{media.tagline}</span>
+            <div className={styles["media__title-and-tagline-container"]}>
+              <div className={styles["media__title-container"]}>
+                {(media.original_title || media.original_name) && (
+                  <h2 className={styles["media__title"]}>
+                    {mediaType === "movie"
+                      ? media.original_title
+                      : mediaType === "tv" && media.original_name}
+                  </h2>
+                )}
+                {(media.release_date || media.first_air_date) && (
+                  <span className={styles["media__release-date"]}>
+                    {mediaType === "movie"
+                      ? `(${media.release_date.substring(0, 4)})`
+                      : mediaType === "tv" &&
+                        `(${media.first_air_date.substring(0, 4)})`}
+                  </span>
+                )}
               </div>
-            )}
+              {(media.original_title || media.original_name) &&
+                media.tagline && (
+                  <div className={styles["media__tagline-container"]}>
+                    <span>{media.tagline}</span>
+                  </div>
+                )}
+            </div>
+
             <div className={styles["media__quick-info"]}>
               {(media.release_date || media.first_air_date) && (
                 <span className={styles["media__full-release-date"]}>
