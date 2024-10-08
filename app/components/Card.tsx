@@ -108,7 +108,6 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
               priority={true}
             />
           ))}
-        {/* w przyszlości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
         {data && data.length > 0 && (
           <div
             className={`${styles["card__video-container"]} ${
@@ -138,7 +137,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
             }}
           >
             <button
-              className={`${styles["card__choose-trailer__button"]} ${styles["--previous"]}`}
+              className={`${styles["card__choose-trailer-button"]} ${styles["--previous"]}`}
               onClick={handlePreviousTrailer}
               onKeyDown={(e) => {
                 e.stopPropagation();
@@ -147,11 +146,11 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
             >
               <IconNext />
             </button>
-            <span className={styles["card__choose-trailer__number"]}>
+            <span className={styles["card__choose-trailer-number"]}>
               {trailerNumber + 1} / {data.length}
             </span>
             <button
-              className={`${styles["card__choose-trailer__button"]} ${styles["--next"]}`}
+              className={`${styles["card__choose-trailer-button"]} ${styles["--next"]}`}
               onClick={handleNextTrailer}
               onKeyDown={(e) => {
                 e.stopPropagation();
@@ -170,6 +169,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         >
           {!playMovie && (
             <>
+              {/* w przyszlości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
               <button
                 type="button"
                 className={`${styles.card__bookmark}`}
