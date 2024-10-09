@@ -26,7 +26,7 @@
   }
   &__options-list {
     position: absolute;
-    z-index: 2;
+    z-index: 999;
     display: none;
     gap: 1rem;
     width: 100%;
