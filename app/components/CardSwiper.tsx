@@ -108,30 +108,6 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
             priority={true}
           />
         ))}
-      {data && data.length > 0 && (
-        <div
-          className={`${styles["card-swiper__video-container"]} ${
-            playMovie && styles["--play-active"]
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePlayMovie();
-          }}
-        >
-          <div className={styles["card-swiper__play-button-container"]}>
-            <button
-              type="button"
-              className={styles["card-swiper__play-button"]}
-            >
-              <IconPlay className={styles["card-swiper__play-icon"]} />
-              <span className={styles["card-swiper__play-span"]}>Play</span>
-            </button>
-            <span className={styles["card-swiper__trailer-name"]}>
-              {data[trailerNumber].name}
-            </span>
-          </div>
-        </div>
-      )}
       {!playMovie && data && data.length > 0 && (
         <div
           className={styles["card-swiper__choose-trailer"]}
@@ -200,6 +176,31 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
           </button>
         )}
       </div>
+
+      {data && data.length > 0 && (
+        <div
+          className={`${styles["card-swiper__play-video-container"]} ${
+            playMovie && styles["--play-active"]
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePlayMovie();
+          }}
+        >
+          <div className={styles["card-swiper__play-button-container"]}>
+            <button
+              type="button"
+              className={styles["card-swiper__play-button"]}
+            >
+              <IconPlay className={styles["card-swiper__play-icon"]} />
+              <span className={styles["card-swiper__play-span"]}>Play</span>
+            </button>
+            <span className={styles["card-swiper__trailer-name"]}>
+              {data[trailerNumber].name}
+            </span>
+          </div>
+        </div>
+      )}
 
       {!playMovie && (
         <div className={styles["card-swiper__quick-info"]}>

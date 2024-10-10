@@ -70,7 +70,6 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
     <div
       tabIndex={0}
       className={styles["card"]}
-      onClick={data && data.length > 0 ? handlePlayMovie : undefined}
       onKeyDown={(e) => {
         e.key === "Enter" && data && data.length > 0
           ? handlePlayMovie()
@@ -84,6 +83,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         style={{
           position: "relative",
         }}
+        onClick={data && data.length > 0 ? handlePlayMovie : undefined}
       >
         {(movie.backdrop_path || movie.poster_path) &&
           (playMovie && data[0] ? (
@@ -108,27 +108,6 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
               priority={true}
             />
           ))}
-        {data && data.length > 0 && (
-          <div
-            className={`${styles["card__video-container"]} ${
-              playMovie && styles["--play-active"]
-            }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePlayMovie();
-            }}
-          >
-            <div className={styles["card__play-button-container"]}>
-              <button type="button" className={styles["card__play-button"]}>
-                <IconPlay className={styles["card__play-icon"]} />
-                <span className={styles["card__play-span"]}>Play</span>
-              </button>
-              <span className={styles["card__trailer-name"]}>
-                {data[trailerNumber].name}
-              </span>
-            </div>
-          </div>
-        )}
         {!playMovie && data && data.length > 0 && (
           <div
             className={styles["card__choose-trailer"]}
@@ -197,6 +176,27 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
             </button>
           )}
         </div>
+        {data && data.length > 0 && (
+          <div
+            className={`${styles["card__play-video-container"]} ${
+              playMovie && styles["--play-active"]
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePlayMovie();
+            }}
+          >
+            <div className={styles["card__play-button-container"]}>
+              <button type="button" className={styles["card__play-button"]}>
+                <IconPlay className={styles["card__play-icon"]} />
+                <span className={styles["card__play-span"]}>Play</span>
+              </button>
+              <span className={styles["card__trailer-name"]}>
+                {data[trailerNumber].name}
+              </span>
+            </div>
+          </div>
+        )}
       </div>
       <div className={styles["card__quick-info"]}>
         <ul className={styles["card__info-items-list"]}>
