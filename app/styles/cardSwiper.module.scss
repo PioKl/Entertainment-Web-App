@@ -9,7 +9,7 @@
 
   &:hover,
   &:focus-visible {
-    .card-swiper__video-container {
+    .card-swiper__play-video-container {
       visibility: visible;
     }
     .card-swiper__quick-info {
@@ -37,7 +37,8 @@
     background-color: var(--c-semi-dark-blue);
   }
 
-  &__video-container {
+  &__play-video-container {
+    cursor: pointer;
     position: absolute;
     z-index: 5;
     width: 100%;

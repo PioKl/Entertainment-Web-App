@@ -2,11 +2,9 @@
 @use "./base/mixins.scss" as *;
 
 .card {
-  cursor: pointer;
-
   &:hover,
   &:focus-visible {
-    .card__video-container {
+    .card__play-video-container {
       visibility: visible;
     }
   }
@@ -51,7 +49,8 @@
     height: inherit;
   }
 
-  &__video-container {
+  &__play-video-container {
+    cursor: pointer;
     position: absolute;
     z-index: 5;
     width: 100%;
