@@ -56,7 +56,7 @@ const GenreFilterResults = ({
 
   const results = data?.results || [];
   const totalResults = data?.totalResults || 0;
-  const totalPages = data?.totalPages || 0;
+  const totalPages = (data?.totalPages > 500 && 500) || 0;
   const loading = !data && !error;
 
   useEffect(() => {
