@@ -69,7 +69,7 @@ const GenreFilter: React.FC<GenreFilterProps> = ({ filterType }) => {
               className={`btn ${styles["genre-dropdown__button"]}`}
               onClick={handleGenreDropdownButton}
             >
-              {!genreName ? `${filterPlaceholder[filterType]}` : genreName}
+              {filterPlaceholder[filterType]}
             </button>
             <ul
               ref={genreDropDownMenuRef}
