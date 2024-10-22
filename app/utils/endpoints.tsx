@@ -56,6 +56,10 @@ export function getMovieCredits(id: string) {
   return `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 }
 
+export function getMovieVideo(id: string) {
+  return `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
+
 //TV
 
 export function getSearchTv(query: string, page: string) {
@@ -86,4 +90,8 @@ export function getTv(id: string) {
 
 export function getTvCredits(id: string) {
   return `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+}
+
+export function getTvVideo(id: string) {
+  return `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 }
