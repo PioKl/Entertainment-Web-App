@@ -14,7 +14,6 @@ import EmptyStar from "@/app/images/empty-star.svg";
 import IconLink from "@/app/images/icon-link.svg";
 import { breakpoints } from "@/app/utils/breakPoints";
 import { emToPixels } from "@/app/utils/emToPixels";
-import MediaTrailers from "@/app/components/ModalTrailers";
 import ModalTrailers from "@/app/components/ModalTrailers";
 
 interface MediaDetailsProps {
