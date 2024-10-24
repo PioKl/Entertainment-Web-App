@@ -209,9 +209,10 @@
 
   &__links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
-  &__link {
+  &__button {
     display: flex;
     flex-direction: row;
     align-items: center;
