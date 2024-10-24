@@ -1,4 +1,8 @@
 import { getMediaDetails } from "@/app/utils/routes";
-import { getMovie, getMovieCredits } from "@/app/utils/endpoints";
+import {
+  getMovie,
+  getMovieCredits,
+  getMovieVideo,
+} from "@/app/utils/endpoints";
 
-export const GET = getMediaDetails(getMovie, getMovieCredits);
+export const GET = getMediaDetails(getMovie, getMovieCredits, getMovieVideo);
