@@ -15,6 +15,7 @@ export default function HomeLayout({
         {children}
         <Footer />
       </div>
+      <div id="modal-hook"></div>
     </>
   );
 }
