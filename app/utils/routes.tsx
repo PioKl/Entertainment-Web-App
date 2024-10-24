@@ -52,7 +52,8 @@ export function getMediaByTopicType(fetchFunction: (page: string) => string) {
 
 export function getMediaDetails(
   fetchFunctionMedia: (id: string) => string,
-  fetchFunctionCrew: (id: string) => string
+  fetchFunctionCrew: (id: string) => string,
+  fetchFunctionTrailers: (id: string) => string
 ) {
   return async function GET(
     request: Request,
@@ -61,11 +62,12 @@ export function getMediaDetails(
     const id = params.id;
 
     try {
-      const [media, crew] = await Promise.all([
+      const [media, crew, trailers] = await Promise.all([
         fetch(fetchFunctionMedia(id)).then((res) => res.json()),
         fetch(fetchFunctionCrew(id)).then((res) => res.json()),
+        fetch(fetchFunctionTrailers(id)).then((res) => res.json()),
       ]);
-      return NextResponse.json({ media, crew });
+      return NextResponse.json({ media, crew, trailers });
     } catch (error) {
       return NextResponse.json(
         { error: "error fetching data from TMdb" },
