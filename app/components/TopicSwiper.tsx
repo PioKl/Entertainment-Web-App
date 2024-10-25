@@ -38,7 +38,9 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({
 
   return (
     <>
-      <section className={styles["topic-swiper"]}>
+      <section
+        className={`${styles["topic-swiper"]} ${error && styles["--error"]}`}
+      >
         <div
           className={`${styles["topic-swiper__heading-loader-container"]} ${
             !error && movies && styles["--reset"]
@@ -58,12 +60,16 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({
           {!error && !movies && <Loader />}
         </div>
 
-        <div className={styles["topic-swiper__container"]}>
+        <div
+          className={`${styles["topic-swiper__container"]} ${
+            error && styles["--error"]
+          }`}
+        >
           <div className={styles["topic-swiper__placeholder"]}>
             <span>-</span>
           </div>
           {error ? (
-            <Error errorType="error" siteType="static" />
+            <Error errorType="error" siteType="normal" />
           ) : (
             <div className={styles["topic-swiper__swiper"]}>
               {movies && (
