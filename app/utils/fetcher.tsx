@@ -13,7 +13,9 @@ export const fetcherSearch = async (url: string) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error("Response Error");
+      const error = new Error("Response Error");
+      (error as any).status = response.status;
+      throw error;
     }
     const data = await response.json();
     return {
