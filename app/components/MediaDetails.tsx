@@ -123,7 +123,7 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
               >
                 {imageResize ? (
                   <Image
-                    src={`https://image.tmdb.org/t/p/w780/${media.poster_path}`}
+                    src={`https://image.tmdb.org/t/p/original/${media.poster_path}`}
                     className={styles["media__image"]}
                     alt="poster"
                     width={350}
