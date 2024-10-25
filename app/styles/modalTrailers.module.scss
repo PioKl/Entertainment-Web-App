@@ -1,7 +1,7 @@
 @use "./base/resolutions.scss" as *;
 @use "./base/mixins.scss" as *;
 
-.modal-overlay {
+.modal {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,32 +14,171 @@
   padding: 0 1.6rem;
   background-color: rgba(black, 0.85);
   z-index: 999;
-}
 
-.modal-image-container {
-  display: grid;
-  justify-items: end;
-  width: 100%;
-  max-width: 76.8rem;
-  height: clamp(22.5rem, -3.74rem + 69.975vw, 50rem);
-  &__button {
-    position: absolute;
-    top: -4.1rem;
-    color: var(--c-white);
-    text-transform: uppercase;
-    line-height: normal;
-    letter-spacing: 0.3rem;
-    background: transparent;
-    border: none;
+  &__close-modal-button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: inherit;
+    max-width: 76.8rem;
+    margin-bottom: 4.1rem;
+    text-align: end;
+    margin-left: 1.6rem;
+  }
 
+  &__close-modal-button {
+    margin: 0;
+  }
+
+  &__close-modal-button,
+  &__close-button {
     &:hover,
     &:focus-visible {
-      //focus-visible - tylko dla klawiatura/tabulatora focus
-      //color: rgba(var(--c-pure-white-rgba), 0.25);
+      background-color: var(--c-pure-white);
+      .modal__close-modal-icon path,
+      .modal__close-icon path {
+        fill: var(--c-dark-blue);
+      }
     }
 
-    @include desktopSmall {
-      cursor: pointer;
+    &.--active {
+      .modal__close-modal-icon path,
+      .modal__close-icon path {
+        fill: var(--c-pure-white);
+      }
     }
+  }
+
+  &__image-container {
+    display: grid;
+    justify-items: end;
+    width: 100%;
+    max-width: 76.8rem;
+    height: clamp(22.5rem, -3.74rem + 69.975vw, 50rem);
+    &:hover,
+    &:focus-visible {
+      .modal__play-video-container {
+        visibility: visible;
+      }
+    }
+  }
+
+  &__iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__options-buttons,
+  &__choose-trailer {
+    position: absolute;
+    z-index: 6;
+    gap: 0.8rem;
+  }
+
+  &__options-buttons {
+    right: 0;
+    display: grid;
+  }
+  &__choose-trailer {
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-block: 0.8rem;
+    background-color: rgba(var(--c-dark-blue-rgb), 0.5);
+  }
+  &__choose-trailer-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &.--previous {
+      transform: rotate(180deg);
+
+      &:active {
+        transform: rotate(180deg) scale(1.1);
+      }
+    }
+
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+  &__choose-trailer-number {
+    width: 5rem;
+    text-align: center;
+  }
+
+  &__play-video-container {
+    cursor: pointer;
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+    border-radius: inherit;
+    visibility: hidden;
+
+    &.--play-active {
+      display: none;
+    }
+  }
+
+  &__play-button-container {
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+  }
+
+  &__play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 2.85rem;
+    background-color: rgba(var(--c-pure-white-rgba), 0.25);
+    cursor: pointer;
+  }
+  &__play-icon {
+    margin-right: 1.9rem;
+  }
+  &__play-span {
+    display: flex;
+    margin-right: 2.4rem;
+    font-size: var(--h-f-xs);
+    font-weight: 500;
+    color: var(--c-pure-white);
+  }
+  &__trailer-name-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    place-items: center;
+    font-size: clamp(1.5rem, 0.641rem + 2.29vw, 2.4rem);
+    background-color: rgba(var(--c-pure-white-rgba), 0.25);
+    border-bottom-right-radius: 0.8rem;
+    border-bottom-left-radius: 0.8rem;
+
+    @include tablet {
+      font-size: var(--h-f-m);
+      letter-spacing: var(--h-ls-m);
+    }
+  }
+  &__trailer-name {
+    width: 100%;
+    height: auto;
+    white-space: nowrap;
+    padding: 0.5rem 1.2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
   }
 }
