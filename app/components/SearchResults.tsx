@@ -89,7 +89,10 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
         <>
           <Search searchType={searchType} />
           {currentPage > totalPages ? (
-            <Error errorType="wrongPage" siteType="normal" />
+            <Error
+              errorType={error && error.status === 500 ? "error" : "wrongPage"}
+              siteType="normal"
+            />
           ) : (
             <section className={styles.cardsTopic}>
               <div className={styles["cardsTopic__title-container"]}>
