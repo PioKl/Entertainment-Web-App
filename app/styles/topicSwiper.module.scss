@@ -17,8 +17,15 @@
     margin-bottom: 4rem;
   }
 
+  &.--error {
+    position: relative;
+  }
+
   &__container {
     position: absolute;
+    &.--error {
+      position: initial;
+    }
   }
 
   &__placeholder {
