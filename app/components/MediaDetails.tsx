@@ -12,6 +12,7 @@ import HalfStar from "@/app/images/half-star.svg";
 import Star from "@/app/images/star.svg";
 import EmptyStar from "@/app/images/empty-star.svg";
 import IconLink from "@/app/images/icon-link.svg";
+import IconVideo from "@/app/images/icon-video.svg";
 import { breakpoints } from "@/app/utils/breakPoints";
 import { emToPixels } from "@/app/utils/emToPixels";
 import ModalTrailers from "@/app/components/ModalTrailers";
@@ -345,12 +346,17 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
                     <IconLink className={styles["media__link-icon"]} />
                   </button>
                 )}
-                <button
-                  className={`btn ${styles["media__button"]}`}
-                  onClick={openModal}
-                >
-                  Trailers
-                </button>
+                {data.trailers.results && data.trailers.results.length > 0 && (
+                  <button
+                    className={`btn ${styles["media__button"]}`}
+                    onClick={openModal}
+                  >
+                    <span className={styles["media__button-span"]}>
+                      Trailers
+                    </span>
+                    <IconVideo className={styles["media__link-icon"]} />
+                  </button>
+                )}
               </div>
             </div>
           </section>
