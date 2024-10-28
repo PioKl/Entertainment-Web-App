@@ -24,6 +24,8 @@
 
   &__image-container {
     position: relative;
+    width: 35rem;
+    height: 53rem;
     margin-bottom: 2.5rem;
 
     &:after {
@@ -218,12 +220,16 @@
     align-items: center;
     flex: initial;
     padding: 1rem 1.6rem;
+
     &:hover {
       .media__link-icon path {
         fill: var(--c-semi-dark-blue);
         stroke: var(--c-semi-dark-blue);
       }
     }
+  }
+  &__button-span {
+    margin-right: 0.5rem;
   }
   &__link-icon {
     width: 2.8rem;
