@@ -54,12 +54,38 @@
     width: 100%;
     max-width: 76.8rem;
     height: clamp(22.5rem, -3.74rem + 69.975vw, 50rem);
+    background-color: var(--c-semi-dark-blue);
+
+    &:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      width: clamp(2.5rem, 0.115rem + 6.361vw, 5rem);
+      height: clamp(2.5rem, 0.115rem + 6.361vw, 5rem);
+      background-image: url("../images/image-picture.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+
     &:hover,
     &:focus-visible {
       .modal__play-video-container {
         visibility: visible;
       }
+
+      &:after {
+        z-index: -1;
+      }
     }
+  }
+
+  &__iframe,
+  &__image {
+    z-index: 2;
   }
 
   &__iframe {
