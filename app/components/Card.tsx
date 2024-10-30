@@ -6,11 +6,9 @@ import styles from "../styles/card.module.scss";
 import Image from "next/image";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import IconInfo from "@/app/images/icon-info.svg";
-import IconNext from "@/app/images/icon-next.svg";
-import IconClose from "@/app/images/icon-close.svg";
-import IconPlay from "../images/icon-play.svg";
 import MovieIcon from "../images/icon-category-movie.svg";
 import TvIcon from "@/app/images/icon-category-tv.svg";
+import PlayVideo from "./PlayVideo";
 
 interface CardProps {
   movie: any;
@@ -50,20 +48,6 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
 
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
-  };
-
-  const handlePreviousTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber = (prevId - 1 + data.length) % data.length;
-      return newTrailerNumber;
-    });
-  };
-
-  const handleNextTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber = (prevId + 1) % data.length;
-      return newTrailerNumber;
-    });
   };
 
   return (
@@ -108,41 +92,20 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
               priority={true}
             />
           ))}
-        {!playMovie && data && data.length > 0 && (
-          <div
-            className={styles["card__choose-trailer"]}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <button
-              className={`${styles["card__choose-trailer-button"]} ${styles["--previous"]}`}
-              onClick={handlePreviousTrailer}
-              onKeyDown={(e) => {
-                e.stopPropagation();
-                e.key === "Enter" && handlePreviousTrailer;
-              }}
-            >
-              <IconNext />
-            </button>
-            <span className={styles["card__choose-trailer-number"]}>
-              {trailerNumber + 1} / {data.length}
-            </span>
-            <button
-              className={`${styles["card__choose-trailer-button"]} ${styles["--next"]}`}
-              onClick={handleNextTrailer}
-              onKeyDown={(e) => {
-                e.stopPropagation();
-                e.key === "Enter" && handleNextTrailer;
-              }}
-            >
-              <IconNext />
-            </button>
-          </div>
-        )}
+        <PlayVideo
+          data={data}
+          type="card"
+          playMovie={playMovie}
+          setPlayMovie={setPlayMovie}
+          trailerNumber={trailerNumber}
+          setTrailerNumber={setTrailerNumber}
+        />
         <div
           className={styles["card__options-buttons"]}
           onClick={(e) => {
+            e.stopPropagation();
+          }}
+          onKeyDown={(e) => {
             e.stopPropagation();
           }}
         >
@@ -166,37 +129,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
               </button>
             </>
           )}
-          {playMovie && data && data.length > 0 && (
-            <button
-              type="button"
-              className={`btn-option ${styles["card__close-button"]}`}
-              onClick={handlePlayMovie}
-            >
-              <IconClose className={styles["card__close-icon"]} />
-            </button>
-          )}
         </div>
-        {data && data.length > 0 && (
-          <div
-            className={`${styles["card__play-video-container"]} ${
-              playMovie && styles["--play-active"]
-            }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePlayMovie();
-            }}
-          >
-            <div className={styles["card__play-button-container"]}>
-              <button type="button" className={styles["card__play-button"]}>
-                <IconPlay className={styles["card__play-icon"]} />
-                <span className={styles["card__play-span"]}>Play</span>
-              </button>
-              <span className={styles["card__trailer-name"]}>
-                {data[trailerNumber].name}
-              </span>
-            </div>
-          </div>
-        )}
       </div>
       <div className={styles["card__quick-info"]}>
         <ul className={styles["card__info-items-list"]}>
