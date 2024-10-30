@@ -7,10 +7,8 @@ import Image from "next/image";
 import MovieIcon from "../images/icon-category-movie.svg";
 import TvIcon from "@/app/images/icon-category-tv.svg";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
-import IconPlay from "../images/icon-play.svg";
-import IconNext from "@/app/images/icon-next.svg";
-import IconClose from "@/app/images/icon-close.svg";
 import IconInfo from "@/app/images/icon-info.svg";
+import PlayVideo from "./PlayVideo";
 
 interface CardSwiperProps {
   movie: any;
@@ -54,20 +52,6 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
     setPlayMovie(!playMovie);
   };
 
-  const handlePreviousTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber = (prevId - 1 + data.length) % data.length;
-      return newTrailerNumber;
-    });
-  };
-
-  const handleNextTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber = (prevId + 1) % data.length;
-      return newTrailerNumber;
-    });
-  };
-
   return (
     <div
       tabIndex={0}
@@ -108,41 +92,20 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
             priority={true}
           />
         ))}
-      {!playMovie && data && data.length > 0 && (
-        <div
-          className={styles["card-swiper__choose-trailer"]}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          <button
-            className={`${styles["card-swiper__choose-trailer-button"]} ${styles["--previous"]}`}
-            onClick={handlePreviousTrailer}
-            onKeyDown={(e) => {
-              e.stopPropagation();
-              e.key === "Enter" && handlePreviousTrailer;
-            }}
-          >
-            <IconNext />
-          </button>
-          <span className={styles["card-swiper__choose-trailer-number"]}>
-            {trailerNumber + 1} / {data.length}
-          </span>
-          <button
-            className={`${styles["card-swiper__choose-trailer-button"]} ${styles["--next"]}`}
-            onClick={handleNextTrailer}
-            onKeyDown={(e) => {
-              e.stopPropagation();
-              e.key === "Enter" && handleNextTrailer;
-            }}
-          >
-            <IconNext />
-          </button>
-        </div>
-      )}
+      <PlayVideo
+        data={data}
+        type="card-swiper"
+        playMovie={playMovie}
+        setPlayMovie={setPlayMovie}
+        trailerNumber={trailerNumber}
+        setTrailerNumber={setTrailerNumber}
+      />
       <div
         className={styles["card-swiper__options-buttons"]}
         onClick={(e) => {
+          e.stopPropagation();
+        }}
+        onKeyDown={(e) => {
           e.stopPropagation();
         }}
       >
@@ -166,41 +129,7 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
             </button>
           </>
         )}
-        {playMovie && data && data.length > 0 && (
-          <button
-            type="button"
-            className={`btn-option ${styles["card-swiper__close-button"]}`}
-            onClick={handlePlayMovie}
-          >
-            <IconClose className={styles["card-swiper__close-icon"]} />
-          </button>
-        )}
       </div>
-
-      {data && data.length > 0 && (
-        <div
-          className={`${styles["card-swiper__play-video-container"]} ${
-            playMovie && styles["--play-active"]
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePlayMovie();
-          }}
-        >
-          <div className={styles["card-swiper__play-button-container"]}>
-            <button
-              type="button"
-              className={styles["card-swiper__play-button"]}
-            >
-              <IconPlay className={styles["card-swiper__play-icon"]} />
-              <span className={styles["card-swiper__play-span"]}>Play</span>
-            </button>
-            <span className={styles["card-swiper__trailer-name"]}>
-              {data[trailerNumber].name}
-            </span>
-          </div>
-        </div>
-      )}
 
       {!playMovie && (
         <div className={styles["card-swiper__quick-info"]}>
