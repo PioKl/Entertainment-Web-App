@@ -2,9 +2,8 @@ import { createPortal } from "react-dom";
 import { useState } from "react";
 import styles from "@/app/styles/modalTrailers.module.scss";
 import Image from "next/image";
-import IconNext from "@/app/images/icon-next.svg";
-import IconPlay from "@/app/images/icon-play.svg";
 import IconClose from "@/app/images/icon-close.svg";
+import PlayVideo from "./PlayVideo";
 
 interface ModalTrailersProps {
   data: {
@@ -21,24 +20,9 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
 
   const [playMovie, setPlayMovie] = useState(false);
   const [trailerNumber, setTrailerNumber] = useState(0);
+
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
-  };
-
-  const handlePreviousTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber =
-        (prevId - 1 + data.trailers.results.length) %
-        data.trailers.results.length;
-      return newTrailerNumber;
-    });
-  };
-
-  const handleNextTrailer = () => {
-    setTrailerNumber((prevId) => {
-      const newTrailerNumber = (prevId + 1) % data.trailers.results.length;
-      return newTrailerNumber;
-    });
   };
 
   if (!modalHook) {
@@ -46,7 +30,13 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
   }
 
   return createPortal(
-    <div tabIndex={0} className={styles["modal"]}>
+    <div
+      tabIndex={0}
+      className={styles["modal"]}
+      onKeyDown={(e) => {
+        e.key === "Enter" ? handlePlayMovie() : undefined;
+      }}
+    >
       <div className={styles["modal__close-modal-button-container"]}>
         <button
           className={`btn-option ${styles["modal__close-modal-button"]}`}
@@ -87,80 +77,14 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
             priority={true}
           />
         )}
-
-        {!playMovie && data.trailers && data.trailers.results.length > 0 && (
-          <div
-            className={styles["modal__choose-trailer"]}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            <button
-              className={`${styles["modal__choose-trailer-button"]} ${styles["--previous"]}`}
-              onClick={handlePreviousTrailer}
-              onKeyDown={(e) => {
-                e.stopPropagation();
-                e.key === "Enter" && handlePreviousTrailer;
-              }}
-            >
-              <IconNext />
-            </button>
-            <span className={styles["modal__choose-trailer-number"]}>
-              {trailerNumber + 1} / {data.trailers.results.length}
-            </span>
-            <button
-              className={`${styles["modal__choose-trailer-button"]} ${styles["--next"]}`}
-              onClick={handleNextTrailer}
-              onKeyDown={(e) => {
-                e.stopPropagation();
-                e.key === "Enter" && handleNextTrailer;
-              }}
-            >
-              <IconNext />
-            </button>
-          </div>
-        )}
-
-        {data.trailers && data.trailers.results.length > 0 && (
-          <div
-            className={`${styles["modal__play-video-container"]} ${
-              playMovie && styles["--play-active"]
-            }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePlayMovie();
-            }}
-          >
-            <div className={styles["modal__play-button-container"]}>
-              <button type="button" className={styles["modal__play-button"]}>
-                <IconPlay className={styles["modal__play-icon"]} />
-                <span className={styles["modal__play-span"]}>Play</span>
-              </button>
-              <div className={styles["modal__trailer-name-container"]}>
-                <span className={styles["modal__trailer-name"]}>
-                  {data.trailers.results[trailerNumber].name}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div
-          className={styles["modal__options-buttons"]}
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-        >
-          {playMovie && data.trailers && data.trailers.results.length > 0 && (
-            <button
-              type="button"
-              className={`btn-option ${styles["modal__close-button"]}`}
-              onClick={handlePlayMovie}
-            >
-              <IconClose className={styles["modal__close-icon"]} />
-            </button>
-          )}
-        </div>
+        <PlayVideo
+          data={data}
+          type="modal"
+          playMovie={playMovie}
+          setPlayMovie={setPlayMovie}
+          trailerNumber={trailerNumber}
+          setTrailerNumber={setTrailerNumber}
+        />
       </div>
     </div>,
     modalHook
