@@ -9,7 +9,7 @@
 
   &:hover,
   &:focus-visible {
-    .card-swiper__play-video-container {
+    :global(.video__play-video-container) {
       visibility: visible;
     }
     .card-swiper__quick-info {
@@ -37,109 +37,10 @@
     background-color: var(--c-semi-dark-blue);
   }
 
-  &__play-video-container {
-    cursor: pointer;
-    position: absolute;
-    z-index: 5;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
-    border-radius: inherit;
-    visibility: hidden;
-
-    &.--play-active {
-      display: none;
-    }
-  }
-
-  &__play-button-container {
-    display: grid;
-    place-items: center;
-    gap: 1rem;
-  }
-  &__play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    align-items: center;
-    padding: 0.9rem;
-    border: none;
-    border-radius: 2.85rem;
-    background-color: rgba(var(--c-pure-white-rgba), 0.25);
-    cursor: pointer;
-  }
-  &__play-icon {
-    @include tablet {
-      margin-right: 1.9rem;
-    }
-  }
-  &__play-span {
-    display: none;
-    font-size: var(--h-f-xs);
-    font-weight: 500;
-    color: var(--c-pure-white);
-
-    @include tablet {
-      display: flex;
-      margin-right: 2.4rem;
-    }
-  }
-
-  &__trailer-name {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    white-space: nowrap;
-    padding: 0.5rem 1.2rem;
-    background-color: rgba(var(--c-pure-white-rgba), 0.25);
-    border-bottom-right-radius: 0.8rem;
-    border-bottom-left-radius: 0.8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-  }
-
-  &__options-buttons,
-  &__choose-trailer {
+  &__options-buttons {
     position: absolute;
     z-index: 6;
     gap: 0.8rem;
-  }
-
-  &__choose-trailer {
-    left: 0;
-    display: flex;
-    align-items: center;
-    padding-block: 0.8rem;
-    background-color: rgba(var(--c-dark-blue-rgb), 0.5);
-    border-top-left-radius: 0.8rem;
-  }
-  &__choose-trailer-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    &.--previous {
-      transform: rotate(180deg);
-
-      &:active {
-        transform: rotate(180deg) scale(1.1);
-      }
-    }
-
-    &:active {
-      transform: scale(1.1);
-    }
-  }
-  &__choose-trailer-number {
-    width: 5rem;
-    text-align: center;
   }
 
   &__options-buttons {
@@ -175,20 +76,17 @@
     }
   }
 
-  &__info-button,
-  &__close-button {
+  &__info-button {
     &:hover,
     &:focus-visible {
       background-color: var(--c-pure-white);
-      .card-swiper__info-icon path,
-      .card-swiper__close-icon path {
+      .card-swiper__info-icon path {
         fill: var(--c-dark-blue);
       }
     }
 
     &.--active {
-      .card-swiper__info-icon path,
-      .card-swiper__close-icon path {
+      .card-swiper__info-icon path {
         fill: var(--c-pure-white);
       }
     }
