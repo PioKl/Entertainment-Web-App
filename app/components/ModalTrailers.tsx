@@ -31,10 +31,12 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
 
   return createPortal(
     <div
+      id="modalId"
       tabIndex={0}
       className={styles["modal"]}
       onKeyDown={(e) => {
         e.key === "Enter" ? handlePlayMovie() : undefined;
+        e.key === "Escape" ? closeModal() : undefined;
       }}
     >
       <div className={styles["modal__close-modal-button-container"]}>
