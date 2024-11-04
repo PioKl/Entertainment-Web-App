@@ -10,7 +10,7 @@ export default function HomeLayout({
 }>) {
   return (
     <>
-      <div className={styles.home}>
+      <div id="homeLayout" className={styles.home}>
         <Header />
         {children}
         <Footer />
