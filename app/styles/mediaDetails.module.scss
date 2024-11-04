@@ -221,7 +221,8 @@
     flex: initial;
     padding: 1rem 1.6rem;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       .media__link-icon path {
         fill: var(--c-semi-dark-blue);
         stroke: var(--c-semi-dark-blue);
