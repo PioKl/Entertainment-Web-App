@@ -50,6 +50,28 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
     setIsModalOpen(false);
   };
 
+  //Zablokowanie tabulacji na elementach homeLayout, ma działać tylko modal
+  useEffect(() => {
+    const homeLayout = document.getElementById("homeLayout");
+    const modal = document.getElementById("modalId");
+    if (homeLayout) {
+      const homeLayoutElements = homeLayout.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (isModalOpen) {
+        modal && modal.focus();
+        homeLayoutElements.forEach((element) => {
+          element.setAttribute("tabindex", "-1");
+        });
+      } else {
+        homeLayoutElements.forEach((element) => {
+          element.setAttribute("tabindex", "0");
+        });
+      }
+    }
+  }, [isModalOpen]);
+
   const renderStars = (vote_average: number) => {
     const rating = (vote_average * 5) / 10; // Przekształcenie oceny z 0-10 na 0-5, czyli od 0 do 5, co oznacza od 0 do 5 gwiazdek
     const fullStars = Math.floor(rating); // Pełne gwiazdki
@@ -335,16 +357,17 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
 
               <div className={styles["media__links"]}>
                 {media.homepage && (
-                  <button className={`btn ${styles["media__button"]}`}>
+                  <>
                     <a
+                      className={`btn ${styles["media__button"]}`}
                       href={media.homepage}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       Website
+                      <IconLink className={styles["media__link-icon"]} />
                     </a>
-                    <IconLink className={styles["media__link-icon"]} />
-                  </button>
+                  </>
                 )}
                 {data.trailers.results && data.trailers.results.length > 0 && (
                   <button
