@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "@/app/styles/playVideo.module.scss";
 import "../styles/playVideo.scss";
 import IconNext from "@/app/images/icon-next.svg";
@@ -69,6 +70,8 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
     });
   };
 
+  const [isChooseTrailerFocused, setIsChooseTrailerFocused] = useState(false);
+
   return (
     <>
       {!playMovie && checkDataTrailersLength(data) > 0 && (
@@ -77,13 +80,22 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
+          onFocus={() => {
+            setIsChooseTrailerFocused(true);
+          }}
+          onBlur={() => {
+            setIsChooseTrailerFocused(false);
+          }}
+          onMouseLeave={() => {
+            setIsChooseTrailerFocused(false);
+          }}
         >
           <button
             className={`${styles["video__choose-trailer-button"]} ${styles["--previous"]}`}
             onClick={handlePreviousTrailer}
             onKeyDown={(e) => {
               e.stopPropagation();
-              e.key === "Enter" && handlePreviousTrailer;
+              e.key === "ArrowLeft" && handlePreviousTrailer();
             }}
           >
             <IconNext />
@@ -96,7 +108,8 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
             onClick={handleNextTrailer}
             onKeyDown={(e) => {
               e.stopPropagation();
-              e.key === "Enter" && handleNextTrailer;
+              //e.key === "Enter" && handleNextTrailer;
+              e.key === "ArrowRight" && handleNextTrailer();
             }}
           >
             <IconNext />
@@ -107,7 +120,7 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
         <div
           className={`video__play-video-container ${
             playMovie && "--play-active"
-          }`}
+          } ${isChooseTrailerFocused && "--focused"}`}
           onClick={(e) => {
             e.stopPropagation();
             handlePlayMovie();
