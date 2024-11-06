@@ -16,5 +16,8 @@
     &.--play-active {
       display: none;
     }
+    &.--focused {
+      visibility: visible;
+    }
   }
 }
