@@ -39,15 +39,6 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
         e.key === "Escape" ? closeModal() : undefined;
       }}
     >
-      <div className={styles["modal__close-modal-button-container"]}>
-        <button
-          className={`btn-option ${styles["modal__close-modal-button"]}`}
-          onClick={closeModal}
-        >
-          <IconClose className={styles["modal__close-modal-icon"]} />
-        </button>
-      </div>
-
       <div
         className={`${styles["modal__image-container"]} ${
           playMovie && styles["--play-active"]
@@ -87,6 +78,14 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
           trailerNumber={trailerNumber}
           setTrailerNumber={setTrailerNumber}
         />
+      </div>
+      <div className={styles["modal__close-modal-button-container"]}>
+        <button
+          className={`btn-option ${styles["modal__close-modal-button"]}`}
+          onClick={closeModal}
+        >
+          <IconClose className={styles["modal__close-modal-icon"]} />
+        </button>
       </div>
     </div>,
     modalHook
