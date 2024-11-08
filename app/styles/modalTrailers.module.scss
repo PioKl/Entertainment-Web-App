@@ -24,6 +24,7 @@
   &__close-modal-button-container {
     display: flex;
     justify-content: flex-end;
+    order: 1;
     width: inherit;
     max-width: 76.8rem;
     margin-bottom: 4.1rem;
@@ -51,6 +52,7 @@
   &__image-container {
     display: grid;
     justify-items: end;
+    order: 2;
     width: 100%;
     max-width: 76.8rem;
     height: clamp(22.5rem, -3.74rem + 69.975vw, 50rem);
