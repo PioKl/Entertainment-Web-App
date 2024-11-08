@@ -80,15 +80,14 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
           onClick={(e) => {
             e.stopPropagation();
           }}
-          onFocus={() => {
-            setIsChooseTrailerFocused(true);
-          }}
-          onBlur={() => {
-            setIsChooseTrailerFocused(false);
-          }}
-          onMouseLeave={() => {
-            setIsChooseTrailerFocused(false);
-          }}
+          {...(type === "modal" && {
+            onFocus: () => {
+              setIsChooseTrailerFocused(true);
+            },
+            onMouseLeave: () => {
+              setIsChooseTrailerFocused(false);
+            },
+          })}
         >
           <button
             className={`${styles["video__choose-trailer-button"]} ${styles["--previous"]}`}
@@ -108,7 +107,6 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
             onClick={handleNextTrailer}
             onKeyDown={(e) => {
               e.stopPropagation();
-              //e.key === "Enter" && handleNextTrailer;
               e.key === "ArrowRight" && handleNextTrailer();
             }}
           >
@@ -124,6 +122,10 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
           onClick={(e) => {
             e.stopPropagation();
             handlePlayMovie();
+          }}
+          onKeyDown={(e) => {
+            e.stopPropagation();
+            e.key === "Enter" && handlePlayMovie;
           }}
         >
           <div className={styles["video__play-button-container"]}>
