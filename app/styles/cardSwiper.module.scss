@@ -8,7 +8,8 @@
   background-color: var(--c-semi-dark-blue);
 
   &:hover,
-  &:focus-visible {
+  &:focus-within {
+    //&:focus-within focus utrzyma się gdy będzie na card, a także wszystkich jego dzieciach
     :global(.video__play-video-container) {
       visibility: visible;
     }
