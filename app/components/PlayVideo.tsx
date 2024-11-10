@@ -54,7 +54,7 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
     setPlayMovie(!playMovie);
   };
 
-  //to można zrobić za pomocą handlePreviousTrailer i handleNextTrailers z utils/functions, po prostu inny sposób
+  //to można zrobić za pomocą handlePreviousTrailer i handleNextTrailers z utils/functions przy odpowiednich modyfikacjach, po prostu inny sposób
   const handlePreviousTrailer = () => {
     setTrailerNumber((prevId) => {
       const newTrailerNumber =
