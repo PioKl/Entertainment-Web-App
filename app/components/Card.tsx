@@ -9,6 +9,7 @@ import IconInfo from "@/app/images/icon-info.svg";
 import MovieIcon from "../images/icon-category-movie.svg";
 import TvIcon from "@/app/images/icon-category-tv.svg";
 import PlayVideo from "./PlayVideo";
+import { handlePreviousTrailer, handleNextTrailer } from "../utils/functions";
 
 interface CardProps {
   movie: any;
@@ -58,6 +59,8 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         e.key === "Enter" && data && data.length > 0
           ? handlePlayMovie()
           : undefined;
+        e.key === "ArrowRight" && handleNextTrailer(setTrailerNumber, data);
+        e.key === "ArrowLeft" && handlePreviousTrailer(setTrailerNumber, data);
       }}
     >
       <div
