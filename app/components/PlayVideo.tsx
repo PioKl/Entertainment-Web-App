@@ -28,8 +28,6 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
   setPlayMovie,
   setTrailerNumber,
 }) => {
-  //to można zrobić za pomocą handlePreviousTrailer i handleNextTrailers z utils/functions, wtedy nie byłoby to potrzebne,
-  //po prostu inny sposób
   function checkDataTrailersLength(data: PlayVideoProps["data"]): number {
     return Array.isArray(data)
       ? data.length
