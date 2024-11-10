@@ -4,6 +4,7 @@ import styles from "@/app/styles/modalTrailers.module.scss";
 import Image from "next/image";
 import IconClose from "@/app/images/icon-close.svg";
 import PlayVideo from "./PlayVideo";
+import { handlePreviousTrailer, handleNextTrailer } from "../utils/functions";
 
 interface ModalTrailersProps {
   data: {
@@ -37,6 +38,10 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
       onKeyDown={(e) => {
         e.key === "Enter" ? handlePlayMovie() : undefined;
         e.key === "Escape" ? closeModal() : undefined;
+        e.key === "ArrowRight" &&
+          handleNextTrailer(setTrailerNumber, data.trailers.results);
+        e.key === "ArrowLeft" &&
+          handlePreviousTrailer(setTrailerNumber, data.trailers.results);
       }}
     >
       <div
