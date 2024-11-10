@@ -9,6 +9,7 @@ import TvIcon from "@/app/images/icon-category-tv.svg";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import IconInfo from "@/app/images/icon-info.svg";
 import PlayVideo from "./PlayVideo";
+import { handlePreviousTrailer, handleNextTrailer } from "../utils/functions";
 
 interface CardSwiperProps {
   movie: any;
@@ -67,6 +68,8 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
         e.key === "Enter" && data && data.length > 0
           ? handlePlayMovie()
           : undefined;
+        e.key === "ArrowRight" && handleNextTrailer(setTrailerNumber, data);
+        e.key === "ArrowLeft" && handlePreviousTrailer(setTrailerNumber, data);
       }}
     >
       {(movie.backdrop_path || movie.poster_path) &&
