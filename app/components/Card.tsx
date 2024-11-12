@@ -9,7 +9,7 @@ import IconInfo from "@/app/images/icon-info.svg";
 import MovieIcon from "../images/icon-category-movie.svg";
 import TvIcon from "@/app/images/icon-category-tv.svg";
 import PlayVideo from "./PlayVideo";
-import { handlePreviousTrailer, handleNextTrailer } from "../utils/functions";
+import { useTrailerNavigation } from "../hooks/useTrailersNavigation";
 
 interface CardProps {
   movie: any;
@@ -30,7 +30,7 @@ const mediaTypeToPathKey: Record<string, keyof typeof mediaPath> = {
 const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
   const router = useRouter();
   const [playMovie, setPlayMovie] = useState(false);
-  const [trailerNumber, setTrailerNumber] = useState(0);
+  //const [trailerNumber, setTrailerNumber] = useState(0);
   const handleMediaDetails = () => {
     //Poniżej dla search gdy pokazuje zarówno movie i tv
     movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
@@ -51,6 +51,15 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
     setPlayMovie(!playMovie);
   };
 
+  //W projekcie mam kilka sposobów na użycie handleNextTrailer i handlePreviousTrailer. W Card i CardSwiper jest przy użycie hooka useTrailerNavigation
+  //Natomiast w ModalTrailers za pomocą funkcji handleNextTrailer i handlePreviousTrailer, po prostu dwa różne sposoby, a efekt będzie ten sam.
+  const {
+    trailerNumber,
+    setTrailerNumber,
+    handleNextTrailer,
+    handlePreviousTrailer,
+  } = useTrailerNavigation(data);
+
   return (
     <div
       tabIndex={0}
@@ -59,8 +68,8 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         e.key === "Enter" && data && data.length > 0
           ? handlePlayMovie()
           : undefined;
-        e.key === "ArrowRight" && handleNextTrailer(setTrailerNumber, data);
-        e.key === "ArrowLeft" && handlePreviousTrailer(setTrailerNumber, data);
+        e.key === "ArrowRight" && handleNextTrailer();
+        e.key === "ArrowLeft" && handlePreviousTrailer();
       }}
     >
       <div

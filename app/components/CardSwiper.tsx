@@ -9,7 +9,7 @@ import TvIcon from "@/app/images/icon-category-tv.svg";
 import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import IconInfo from "@/app/images/icon-info.svg";
 import PlayVideo from "./PlayVideo";
-import { handlePreviousTrailer, handleNextTrailer } from "../utils/functions";
+import { useTrailerNavigation } from "../hooks/useTrailersNavigation";
 
 interface CardSwiperProps {
   movie: any;
@@ -32,7 +32,7 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
 }) => {
   const router = useRouter();
   const [playMovie, setPlayMovie] = useState(false);
-  const [trailerNumber, setTrailerNumber] = useState(0);
+  //const [trailerNumber, setTrailerNumber] = useState(0);
   const handleMediaDetails = () => {
     //Poniżej dla search gdy pokazuje zarówno movie i tv
     movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
@@ -53,6 +53,15 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
     setPlayMovie(!playMovie);
   };
 
+  //W projekcie mam kilka sposobów na użycie handleNextTrailer i handlePreviousTrailer. W Card i CardSwiper jest przy użycie hooka useTrailerNavigation
+  //Natomiast w ModalTrailers za pomocą funkcji handleNextTrailer i handlePreviousTrailer, po prostu dwa różne sposoby, a efekt będzie ten sam.
+  const {
+    trailerNumber,
+    setTrailerNumber,
+    handleNextTrailer,
+    handlePreviousTrailer,
+  } = useTrailerNavigation(data);
+
   return (
     <div
       tabIndex={0}
@@ -68,8 +77,8 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
         e.key === "Enter" && data && data.length > 0
           ? handlePlayMovie()
           : undefined;
-        e.key === "ArrowRight" && handleNextTrailer(setTrailerNumber, data);
-        e.key === "ArrowLeft" && handlePreviousTrailer(setTrailerNumber, data);
+        e.key === "ArrowRight" && handleNextTrailer();
+        e.key === "ArrowLeft" && handlePreviousTrailer();
       }}
     >
       {(movie.backdrop_path || movie.poster_path) &&
