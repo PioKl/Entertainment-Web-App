@@ -77,7 +77,9 @@ const PlayVideo: React.FC<PlayVideoProps> = ({
     <>
       {!playMovie && checkDataTrailersLength(data) > 0 && (
         <div
-          className={styles["video__choose-trailer"]}
+          className={`${styles["video__choose-trailer"]} ${
+            type === "modal" && styles["--modal"]
+          }`}
           onClick={(e) => {
             e.stopPropagation();
           }}
