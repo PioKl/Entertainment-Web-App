@@ -20,6 +20,9 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
   const modalHook = document.getElementById("modal-hook");
 
   const [playMovie, setPlayMovie] = useState(false);
+
+  //W projekcie mam kilka sposobów na użycie handleNextTrailer i handlePreviousTrailer. W Card i CardSwiper jest przy użycie hooka useTrailerNavigation
+  //Natomiast w ModalTrailers za pomocą funkcji handleNextTrailer i handlePreviousTrailer, po prostu dwa różne sposoby, a efekt będzie ten sam.
   const [trailerNumber, setTrailerNumber] = useState(0);
 
   const handlePlayMovie = () => {
