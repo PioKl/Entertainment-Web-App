@@ -16,6 +16,10 @@
     padding-block: 0.8rem;
     background-color: rgba(var(--c-dark-blue-rgb), 0.5);
     border-top-left-radius: 0.8rem;
+
+    &.--modal {
+      border-top-left-radius: 0;
+    }
   }
 
   &__choose-trailer-button {
