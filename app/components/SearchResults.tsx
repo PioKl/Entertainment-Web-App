@@ -61,6 +61,13 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
   const totalPages = data?.totalPages || 0;
   const loading = !data && !error;
 
+  console.log(query);
+  console.log(router);
+  console.log(searchParams);
+  console.log(initialPage);
+  console.log(currentPage);
+  console.log(siblingCount);
+  console.log(apiUrl);
   console.log(data);
   console.log(results);
   console.log(totalResults);
