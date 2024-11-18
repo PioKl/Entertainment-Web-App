@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    // Warunkowe ustawienie zmiennej na podstawie środowiska
+    API_KEY: process.env.API_KEY,
+  },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>

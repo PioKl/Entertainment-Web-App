@@ -41,7 +41,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
   };
 
   const { data, error } = useSWR(
-    `https://api.themoviedb.org/3/${mediaType}/${movie.id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
+    `https://api.themoviedb.org/3/${mediaType}/${movie.id}/videos?api_key=${process.env.API_KEY}`,
     fetcher
   );
 
