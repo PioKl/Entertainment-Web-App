@@ -61,6 +61,11 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
   const totalPages = data?.totalPages || 0;
   const loading = !data && !error;
 
+  console.log(data);
+  console.log(results);
+  console.log(totalResults);
+  console.log(totalPages);
+
   useEffect(() => {
     if (window.innerWidth > emToPixels(breakpoints.bpTablet)) {
       setSiblingCount(2);
