@@ -68,9 +68,7 @@ const TopicResults = ({ params, topicType }: TopicResultsProps) => {
 
   //Wynik
   const results = data?.results || [];
-  console.log(results);
   const totalPages = (data?.totalPages >= 500 && 500) || 0;
-  console.log(data?.totalPages);
 
   //Kiedy ma występować efekt ładowania
   const loading = !data && !error;
