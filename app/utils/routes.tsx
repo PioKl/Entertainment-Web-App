@@ -5,14 +5,11 @@ export function getMediaBySearch(
 ) {
   return async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: { query: string } }
   ) {
+    const query = params.query;
     const url = new URL(request.url);
-    const pathname = url.pathname;
-
-    const query = pathname.split("/")[3];
-
-    const page = url.searchParams.get("page") || "1"; // Strona 1, jeśli brak
+    const page = url.searchParams.get("page") || "1"; // Domyślnie strona 1, jeśli brak
 
     console.log("Query:", query);
     console.log("Page:", page);
@@ -23,10 +20,10 @@ export function getMediaBySearch(
         { status: 400 }
       );
     }
-
     try {
-      const response = await fetch(fetchFunction(query, page)); // Fetch z query i page
+      const response = await fetch(fetchFunction(query, page));
       const data = await response.json();
+
       return NextResponse.json(data);
     } catch (error) {
       return NextResponse.json(
