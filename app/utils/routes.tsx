@@ -3,10 +3,16 @@ import { NextResponse } from "next/server";
 export function getMediaBySearch(
   fetchFunction: (query: string, page: string) => string
 ) {
-  return async function GET(request: Request) {
+  return async function GET(
+    request: Request,
+    { params }: { params: { id: string } }
+  ) {
     const url = new URL(request.url);
-    const query = url.searchParams.get("query");
-    const page = url.searchParams.get("page") || "1";
+    const pathname = url.pathname;
+
+    const query = pathname.split("/")[3];
+
+    const page = url.searchParams.get("page") || "1"; // Strona 1, jeśli brak
 
     console.log("Query:", query);
     console.log("Page:", page);
@@ -19,12 +25,10 @@ export function getMediaBySearch(
     }
 
     try {
-      const response = await fetch(fetchFunction(query, page));
+      const response = await fetch(fetchFunction(query, page)); // Fetch z query i page
       const data = await response.json();
-
       return NextResponse.json(data);
     } catch (error) {
-      console.error("Error:", error);
       return NextResponse.json(
         { error: "Error fetching data from TMDb" },
         { status: 500 }
@@ -32,6 +36,7 @@ export function getMediaBySearch(
     }
   };
 }
+
 export function getMediaByTopicType(fetchFunction: (page: string) => string) {
   //fetchFunction - funkcja przyjmuje stringa w postaci parametru page i zwraca stringa
   return async function GET(
