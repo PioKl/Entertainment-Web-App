@@ -4,9 +4,12 @@ export function getMediaBySearch(
   fetchFunction: (query: string, page: string) => string
 ) {
   return async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
-    const query = searchParams.get("query");
-    const page = searchParams.get("page") || "1"; //Domyślnie strona pierwsza
+    const url = new URL(request.url);
+    const query = url.searchParams.get("query");
+    const page = url.searchParams.get("page") || "1";
+
+    console.log("Query:", query);
+    console.log("Page:", page);
 
     if (!query) {
       return NextResponse.json(
@@ -14,12 +17,14 @@ export function getMediaBySearch(
         { status: 400 }
       );
     }
+
     try {
       const response = await fetch(fetchFunction(query, page));
       const data = await response.json();
 
       return NextResponse.json(data);
     } catch (error) {
+      console.error("Error:", error);
       return NextResponse.json(
         { error: "Error fetching data from TMDb" },
         { status: 500 }
@@ -27,7 +32,6 @@ export function getMediaBySearch(
     }
   };
 }
-
 export function getMediaByTopicType(fetchFunction: (page: string) => string) {
   //fetchFunction - funkcja przyjmuje stringa w postaci parametru page i zwraca stringa
   return async function GET(
