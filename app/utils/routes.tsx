@@ -7,11 +7,21 @@ export function getMediaBySearch(
     request: Request,
     { params }: { params: { query: string } }
   ) {
-    const query = params.query;
     const url = new URL(request.url);
-    const page = url.searchParams.get("page") || "1"; // Domyślnie strona 1, jeśli brak
+    const pathname = url.pathname;
+
+    let mediaType = "all";
+    if (pathname.includes("/movies/")) {
+      mediaType = "movie";
+    } else if (pathname.includes("/tv/")) {
+      mediaType = "tv";
+    }
+
+    const query = params.query; // Parametr query z dynamicznej ścieżki
+    const page = url.searchParams.get("page") || "1"; // Strona 1, jeśli brak
 
     console.log("Query:", query);
+    console.log("Media Type:", mediaType);
     console.log("Page:", page);
 
     if (!query) {
@@ -20,6 +30,7 @@ export function getMediaBySearch(
         { status: 400 }
       );
     }
+
     try {
       const response = await fetch(fetchFunction(query, page));
       const data = await response.json();
