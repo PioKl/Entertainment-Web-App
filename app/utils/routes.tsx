@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export function getMediaBySearch(
-  fetchFunction: (query: string, page: string) => string
+  fetchFunction: (query: string, page: string, mediaType: string) => string
 ) {
   return async function GET(
     request: Request,
@@ -10,6 +10,7 @@ export function getMediaBySearch(
     const url = new URL(request.url);
     const pathname = url.pathname;
 
+    // Ustawienie mediaType na podstawie ścieżki
     let mediaType = "all";
     if (pathname.includes("/movies/")) {
       mediaType = "movie";
@@ -32,7 +33,7 @@ export function getMediaBySearch(
     }
 
     try {
-      const response = await fetch(fetchFunction(query, page));
+      const response = await fetch(fetchFunction(query, page, mediaType));
       const data = await response.json();
 
       return NextResponse.json(data);
