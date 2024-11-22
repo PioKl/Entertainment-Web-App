@@ -5,9 +5,18 @@ export async function GET(
   request: Request,
   { params }: { params: { query: string } }
 ) {
-  const query = params.query;
-  const url = new URL(request.url);
-  const page = url.searchParams.get("page") || "1"; // Domyślnie strona 1, jeśli brak
+  const { searchParams } = new URL(request.url);
+  let query;
+  const page = searchParams.get("page") || "1"; // Domyślnie strona 1, jeśli brak
+
+  //Dla localhost
+  if (process.env.NODE_ENV === "development") {
+    query = searchParams.get("query");
+  }
+  //Dla produkcji (czyli NODE_ENV jest production)
+  else {
+    query = params.query;
+  }
 
   console.log("Query:", query);
   console.log("Page:", page);
@@ -31,28 +40,3 @@ export async function GET(
     );
   }
 }
-
-/* export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get("query");
-  const page = searchParams.get("page") || "1"; //Domyślnie strona pierwsza
-
-  if (!query) {
-    return NextResponse.json(
-      { error: "Query parameter is missing" },
-      { status: 400 }
-    );
-  }
-
-  try {
-    const response = await fetch(getSearchMovies(query, page));
-    const data = await response.json();
-
-    return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json(
-      { error: "Error fetching data from TMDb" },
-      { status: 500 }
-    );
-  }
-} */
