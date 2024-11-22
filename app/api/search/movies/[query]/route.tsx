@@ -11,11 +11,11 @@ export async function GET(
 
   //Dla localhost
   if (process.env.NODE_ENV === "development") {
-    query = searchParams.get("query");
+    query = searchParams.get("query"); //pochodzi z części zapytania (query string) w URL, np. ?query=alien
   }
   //Dla produkcji (czyli NODE_ENV jest production)
   else {
-    query = params.query;
+    query = params.query; // params.query, pochodzi z dynamicznego segmentu ścieżki URL w Next.js (dla produkcji w vercel)
   }
 
   console.log("Query:", query);
