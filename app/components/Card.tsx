@@ -45,8 +45,6 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
     fetcher
   );
 
-  console.log(data);
-
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
   };
@@ -86,7 +84,7 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
             <iframe
               className={styles["card__iframe"]}
               src={`https://www.youtube.com/embed/${data[trailerNumber].key}?autoplay=1`}
-              allow="fullscreen"
+              allow="fullscreen; autoplay"
               onClick={(e) => {
                 e.stopPropagation();
               }}

@@ -47,8 +47,6 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
     fetcher
   );
 
-  console.log(data);
-
   const handlePlayMovie = () => {
     setPlayMovie(!playMovie);
   };
@@ -86,7 +84,7 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
           <iframe
             className={styles["card-swiper__iframe"]}
             src={`https://www.youtube.com/embed/${data[trailerNumber].key}?autoplay=1`}
-            allow="fullscreen"
+            allow="fullscreen; autoplay"
             onClick={(e) => {
               e.stopPropagation();
             }}

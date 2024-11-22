@@ -59,7 +59,7 @@ const ModalTrailers: React.FC<ModalTrailersProps> = ({ data, closeModal }) => {
           <iframe
             className={styles["modal__iframe"]}
             src={`https://www.youtube.com/embed/${data.trailers.results[trailerNumber].key}?autoplay=1`}
-            allow="fullscreen"
+            allow="fullscreen; autoplay"
             onClick={(e) => {
               e.stopPropagation();
             }}
