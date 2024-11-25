@@ -32,7 +32,6 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
 }) => {
   const router = useRouter();
   const [playMovie, setPlayMovie] = useState(false);
-  //const [trailerNumber, setTrailerNumber] = useState(0);
   const handleMediaDetails = () => {
     //Poniżej dla search gdy pokazuje zarówno movie i tv
     movie.media_type === "movie" && router.push(`/movies/movie/${movie.id}`);
