@@ -39,7 +39,7 @@ Users should be able to:
 ![tablet-details](./public/assets/resolutionsPreview/tablet-details.png)
 ![desktop-full](./public/assets/resolutionsPreview/desktop.png)
 ![desktop](./public/assets/resolutionsPreview/desktop2.png)
-![desktop-details](./public/assets/resolutionsPreview/desktop.png)
+![desktop-details](./public/assets/resolutionsPreview/desktop-details.png)
 
 ### Links
 
