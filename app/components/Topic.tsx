@@ -49,7 +49,7 @@ const Topic: React.FC<TopicProps> = ({
         </div>
 
         {error ? (
-          <Error errorType="error" siteType="static" />
+          <Error errorType="error" siteType="static" redirectLink={false} />
         ) : (
           <>
             <div className={styles["cardsTopic__cards"]}>
