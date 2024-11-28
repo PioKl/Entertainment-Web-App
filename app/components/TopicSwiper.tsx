@@ -69,7 +69,7 @@ const TopicSwiper: React.FC<TopicSwiperProps> = ({
             <span>-</span>
           </div>
           {error ? (
-            <Error errorType="error" siteType="normal" />
+            <Error errorType="error" siteType="normal" redirectLink={false} />
           ) : (
             <div className={styles["topic-swiper__swiper"]}>
               {movies && (
