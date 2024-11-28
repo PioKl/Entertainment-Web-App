@@ -130,8 +130,12 @@ const MediaDetails = ({ params, mediaType }: MediaDetailsProps) => {
         <>
           {media.crew === false ||
           crew.success === false ||
-          trailers.success ? (
-            <Error errorType="wrongPage" siteType="normal" />
+          trailers.success === false ? (
+            <Error
+              errorType="wrongPage"
+              siteType="normal"
+              redirectLink={false}
+            />
           ) : (
             <>
               {isModalOpen && (
