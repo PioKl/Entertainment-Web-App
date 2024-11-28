@@ -92,6 +92,7 @@ const SearchResults = ({ params, searchType = "all" }: SearchResultProps) => {
             <Error
               errorType={error && error.status === 500 ? "error" : "wrongPage"}
               siteType="normal"
+              redirectLink={false}
             />
           ) : (
             <section className={styles.cardsTopic}>
