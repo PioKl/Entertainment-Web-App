@@ -1,11 +1,13 @@
 import styles from "../styles/error.module.scss";
+import Link from "next/link";
 
 interface ErrorProps {
   errorType: "wrongPage" | "error";
   siteType: "normal" | "static";
+  redirectLink: true | false;
 }
 
-const Error: React.FC<ErrorProps> = ({ errorType, siteType }) => {
+const Error: React.FC<ErrorProps> = ({ errorType, siteType, redirectLink }) => {
   const errorMessages: Record<ErrorProps["errorType"], string> = {
     wrongPage: "Sorry wrong page, nothing here",
     error: "Something went wrong",
@@ -17,7 +19,18 @@ const Error: React.FC<ErrorProps> = ({ errorType, siteType }) => {
         siteType === "static" && styles["--static"]
       }`}
     >
-      <h3 className={styles["error__heading"]}>{errorMessages[errorType]}</h3>
+      {redirectLink ? (
+        <>
+          <h3 className={styles["error__heading"]}>
+            {errorMessages[errorType]}
+          </h3>
+          <Link className={styles["error__link"]} href="/">
+            <span className="btn-more --redirectLink">return to main page</span>
+          </Link>
+        </>
+      ) : (
+        <h3 className={styles["error__heading"]}>{errorMessages[errorType]}</h3>
+      )}
     </div>
   );
 };
