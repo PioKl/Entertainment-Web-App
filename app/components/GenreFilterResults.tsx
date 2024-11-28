@@ -88,7 +88,11 @@ const GenreFilterResults = ({
       ) : (
         <>
           {currentPage > totalPages ? (
-            <Error errorType="wrongPage" siteType="normal" />
+            <Error
+              errorType="wrongPage"
+              siteType="normal"
+              redirectLink={false}
+            />
           ) : (
             <section className={styles.cardsTopic}>
               <div className={styles["cardsTopic__title-container"]}>
