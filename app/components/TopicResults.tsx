@@ -100,7 +100,11 @@ const TopicResults = ({ params, topicType }: TopicResultsProps) => {
       ) : (
         <>
           {currentPage > totalPages ? (
-            <Error errorType="wrongPage" siteType="normal" />
+            <Error
+              errorType="wrongPage"
+              siteType="normal"
+              redirectLink={false}
+            />
           ) : (
             <section className={styles.cardsTopic}>
               <div className={styles["cardsTopic__title-container"]}>
