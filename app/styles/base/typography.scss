@@ -61,6 +61,15 @@ h5 {
     right: 0;
   }
 
+  &.--redirectLink {
+    font-size: var(--h-f-m);
+    font-weight: 300;
+    &::after,
+    &::before {
+      bottom: 0rem;
+    }
+  }
+
   &:hover,
   &:focus-visible {
     &:after,
