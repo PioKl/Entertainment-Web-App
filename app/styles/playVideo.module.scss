@@ -13,9 +13,13 @@
     left: 0;
     display: flex;
     align-items: center;
-    padding-block: 0.8rem;
+    padding-block: 0.25rem;
     background-color: rgba(var(--c-dark-blue-rgb), 0.5);
     border-top-left-radius: 0.8rem;
+
+    @include tablet {
+      padding-block: 0.8rem;
+    }
 
     &.--modal {
       border-top-left-radius: 0;
