@@ -9,14 +9,14 @@ export default function Register() {
     email: false,
     password: false,
     repeatPassword: false,
-    passwordComprasion: false,
+    passwordCompare: false,
   });
 
   const [values, setValues] = useState({
     email: "",
     password: "",
     repeatPassword: "",
-    passwordComprasion: "",
+    passwordCompare: "",
   });
 
   const messages = {
@@ -32,7 +32,7 @@ export default function Register() {
       email: values.email === "",
       password: values.password === "",
       repeatPassword: values.repeatPassword === "",
-      passwordComprasion: values.password !== values.repeatPassword,
+      passwordCompare: values.password !== values.repeatPassword,
     };
 
     // Ustawienie błędów w postaci true i false
@@ -40,7 +40,7 @@ export default function Register() {
       newErrors.email ||
       newErrors.password ||
       newErrors.repeatPassword ||
-      newErrors.passwordComprasion
+      newErrors.passwordCompare
     ) {
       setErrors(newErrors);
     }
@@ -50,13 +50,13 @@ export default function Register() {
         email: false,
         password: false,
         repeatPassword: false,
-        passwordComprasion: false,
+        passwordCompare: false,
       });
       setValues({
         email: "",
         password: "",
         repeatPassword: "",
-        passwordComprasion: "",
+        passwordCompare: "",
       });
       console.log("Send");
     }
@@ -113,7 +113,7 @@ export default function Register() {
                 placeholder="Repeat Password"
                 autoComplete="current-password"
               />
-              {(errors.repeatPassword || errors.passwordComprasion) && (
+              {(errors.repeatPassword || errors.passwordCompare) && (
                 <span className={styles["auth__error"]}>
                   {errors.repeatPassword
                     ? messages.errorMessage
