@@ -2,15 +2,24 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import styles from "../../styles/auth.module.scss";
 
+const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+});
+
 export default function Register() {
+  const router = useRouter();
   const [errors, setErrors] = useState({
     email: false,
     password: false,
     repeatPassword: false,
     passwordCompare: false,
   });
+
+  const [emailTaken, setEmailTaken] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
@@ -22,11 +31,13 @@ export default function Register() {
   const messages = {
     errorMessage: "Can’t be empty",
     wrongRepeatPassword: "Password is different",
+    emailTaken: "Email is already taken",
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(values.email);
+
+    setEmailTaken(false);
 
     const newErrors = {
       email: values.email === "",
@@ -46,19 +57,37 @@ export default function Register() {
     }
     //Jeśli nie ma błędów, będzie wysłany endpoint
     else {
+      try {
+        await apiClient.post("/api/auth/register", {
+          userEmail: values.email,
+          password: values.password,
+        });
+        setValues((prevValues) => ({
+          ...prevValues,
+          email: "",
+        }));
+        router.push("/login");
+      } catch (error) {
+        if (axios.isAxiosError(error) && error.response) {
+          if (error.response.status === 400) {
+            setEmailTaken(true);
+          } else {
+            console.error("Unexpected error:", error);
+          }
+        }
+      }
       setErrors({
         email: false,
         password: false,
         repeatPassword: false,
         passwordCompare: false,
       });
-      setValues({
-        email: "",
+      setValues((prevValues) => ({
+        ...prevValues,
         password: "",
         repeatPassword: "",
         passwordCompare: "",
-      });
-      console.log("Send");
+      }));
     }
   };
   return (
@@ -79,9 +108,10 @@ export default function Register() {
                 placeholder="Email address"
                 autoComplete="username"
               />
-              {errors.email && (
+              {(errors.email || emailTaken) && (
                 <span className={styles["auth__error"]}>
-                  {messages.errorMessage}
+                  {errors.email && messages.errorMessage}
+                  {!errors.email && emailTaken && messages.emailTaken}
                 </span>
               )}
             </label>
