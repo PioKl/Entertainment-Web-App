@@ -44,6 +44,12 @@
     margin-left: auto;
     font-size: var(--body-f-s);
     color: var(--c-red);
+
+    &.--wrongEmailOrPassword {
+      display: block;
+      text-align: center;
+      margin-top: 1.8rem;
+    }
   }
 
   &__button {
