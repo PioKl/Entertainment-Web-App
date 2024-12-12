@@ -60,10 +60,36 @@
       }
     }
   }
-
-  &__login-link {
+  &__account {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    @include tablet {
+      gap: 2.4rem;
+    }
     @include desktopSmall {
+      flex-direction: column;
       margin-top: auto;
+    }
+  }
+
+  &__logout-icon {
+    @include desktopSmall {
+      margin-right: 0.8rem;
+    }
+    stroke: var(--c-greyish-blue);
+    path {
+      fill: var(--c-greyish-blue);
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:hover,
+    & :focus-visible {
+      stroke: var(--c-pure-white);
+      path {
+        fill: var(--c-pure-white);
+      }
     }
   }
 }
