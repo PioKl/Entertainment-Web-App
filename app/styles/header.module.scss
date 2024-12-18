@@ -73,6 +73,45 @@
     }
   }
 
+  &__login-link {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--c-greyish-blue);
+
+    &.--avatar-loaded {
+      background-color: transparent;
+    }
+  }
+
+  &__avatar-image {
+    border-radius: 50%;
+  }
+
+  &__avatar-placeholder {
+    width: 1.4rem;
+    height: 1.5rem;
+    stroke: var(--c-semi-dark-blue);
+    path {
+      fill: var(--c-semi-dark-blue);
+    }
+
+    @include tablet {
+      width: 1.8rem;
+      height: 2rem;
+    }
+
+    @include desktopSmall {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  &__logout-button {
+    background: none;
+    border: none;
+  }
+
   &__logout-icon {
     @include desktopSmall {
       margin-right: 0.8rem;
