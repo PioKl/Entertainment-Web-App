@@ -1,0 +1,79 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+  padding: 2.4rem;
+  background-color: var(--c-semi-dark-blue);
+  border-radius: 1rem;
+  text-align: center;
+
+  &__errorMessage {
+    color: var(--c-red);
+  }
+  &__successMessage {
+    color: #5dd35d;
+  }
+
+  &__profileImageContainer {
+    display: grid;
+    place-items: center;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    background-color: var(--c-greyish-blue);
+
+    &.--avatar-loaded {
+      background-color: transparent;
+    }
+  }
+
+  &__profileImage {
+    border-radius: 50%;
+  }
+  &__profilePlaceholderImage {
+    width: 10rem;
+    height: 10rem;
+
+    stroke: var(--c-semi-dark-blue);
+    path {
+      fill: var(--c-semi-dark-blue);
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: inherit;
+  }
+
+  &__fileUpload {
+    font-family: inherit;
+    &:hover {
+      cursor: pointer;
+    }
+    &::-webkit-file-upload-button {
+      background-color: var(--c-red);
+      color: var(--c-pure-white);
+      border: none;
+      border-radius: 0.6rem;
+      padding: 1rem;
+      font-family: inherit;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--c-pure-white);
+        color: var(--c-semi-dark-blue);
+      }
+    }
+  }
+
+  &__button {
+    padding: 1rem;
+  }
+}
