@@ -14,12 +14,11 @@ export default function Register() {
   const router = useRouter();
   const [errors, setErrors] = useState({
     email: false,
+    emailTaken: false,
     password: false,
     repeatPassword: false,
     passwordCompare: false,
   });
-
-  const [emailTaken, setEmailTaken] = useState(false);
 
   const [values, setValues] = useState({
     email: "",
@@ -37,7 +36,10 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setEmailTaken(false);
+    setErrors((prevErrors) => ({
+      ...prevErrors, // zachowuje aktualne wartości poprzednich błędów
+      emailTaken: false,
+    }));
 
     const newErrors = {
       email: values.email === "",
@@ -53,7 +55,12 @@ export default function Register() {
       newErrors.repeatPassword ||
       newErrors.passwordCompare
     ) {
-      setErrors(newErrors);
+      //poniżej inne rozwiązanie zamiast setErrors(newErrors), ze względu na dodanie emailTaken do errors zamiast oddzielnie (const [emailTaken, setEmailTaken] = useState(false))
+      setErrors((prevErrors) => ({
+        ...prevErrors, // zachowuje poprzednie wartości
+        ...newErrors, // nadpisuje nowe wartości
+        emailTaken: prevErrors.emailTaken, // utrzymuje poprzednią wartość emailTaken
+      }));
     }
     //Jeśli nie ma błędów, będzie wysłany endpoint
     else {
@@ -70,18 +77,22 @@ export default function Register() {
       } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
           if (error.response.status === 400) {
-            setEmailTaken(true);
+            setErrors((prevErrors) => ({
+              ...prevErrors, // zachowuje aktualne wartości poprzednich błędów
+              emailTaken: true,
+            }));
           } else {
             console.error("Unexpected error:", error);
           }
         }
       }
-      setErrors({
+      setErrors((prevErrors) => ({
+        ...prevErrors, // zachowuje aktualne wartości poprzednich błędów
         email: false,
         password: false,
         repeatPassword: false,
         passwordCompare: false,
-      });
+      }));
       setValues((prevValues) => ({
         ...prevValues,
         password: "",
@@ -108,10 +119,10 @@ export default function Register() {
                 placeholder="Email address"
                 autoComplete="username"
               />
-              {(errors.email || emailTaken) && (
+              {(errors.email || errors.emailTaken) && (
                 <span className={styles["auth__error"]}>
                   {errors.email && messages.errorMessage}
-                  {!errors.email && emailTaken && messages.emailTaken}
+                  {!errors.email && errors.emailTaken && messages.emailTaken}
                 </span>
               )}
             </label>
