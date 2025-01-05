@@ -33,3 +33,14 @@ export const fetcherMedia = (url: string) =>
   fetch(url)
     .then((res) => res.json())
     .then((data) => data || []);
+
+// unkcja fetcher pobiera dane z danego URL-a. Typ generyczny <T> oznacza, że wynik będzie miał dynamicznie określony typ.
+export const fetcherPromise = <T,>(url: string): Promise<T> =>
+  fetch(url).then((res) => {
+    if (!res.ok) {
+      //Jeśli odpowiedź nie jest OK, wtedy błąd
+      throw new Error(`Error fetching: ${res.statusText}`);
+    }
+    //Zwracane dane w formacie JSON, które zostaną uznane za typ T
+    return res.json();
+  });
