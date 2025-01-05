@@ -10,6 +10,7 @@ import MovieIcon from "../images/icon-category-movie.svg";
 import TvIcon from "@/app/images/icon-category-tv.svg";
 import PlayVideo from "./PlayVideo";
 import { useTrailerNavigation } from "../hooks/useTrailersNavigation";
+import useBookmarks from "../hooks/useBookmarks";
 
 interface CardProps {
   movie: any;
@@ -56,6 +57,13 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
     handleNextTrailer,
     handlePreviousTrailer,
   } = useTrailerNavigation(data);
+
+  //bookmarki
+  const { bookmarkedItems, toggleBookmark } = useBookmarks();
+
+  const handleBookmarkToggle = (movieId: string | number, type: string) => {
+    toggleBookmark(movieId, type);
+  };
 
   return (
     <div
@@ -120,11 +128,19 @@ const Card: React.FC<CardProps> = ({ movie, mediaType = "dynamic" }) => {
         >
           {!playMovie && (
             <>
-              {/* w przyszlości z active className={`${styles.card__bookmark} ${styles['--active']}`} */}
               <button
                 type="button"
-                className={`${styles.card__bookmark}`}
+                className={`${styles["card__bookmark"]}  ${
+                  bookmarkedItems.some(
+                    (item) =>
+                      item.id === movie.id.toString() &&
+                      item.type === (movie.media_type || mediaType)
+                  ) && styles["--active"]
+                }`}
                 title="bookmark"
+                onClick={() =>
+                  handleBookmarkToggle(movie.id, movie.media_type || mediaType)
+                }
               >
                 <BookMarkIcon className={styles["card__bookmark-icon"]} />
               </button>
