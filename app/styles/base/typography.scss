@@ -35,6 +35,14 @@ h5 {
     background-color: var(--c-pure-white);
     color: var(--c-semi-dark-blue);
   }
+
+  &.--short-with-padding {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: initial;
+    padding: 1rem 1.6rem;
+  }
 }
 
 .btn-more {
