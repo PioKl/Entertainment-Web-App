@@ -10,6 +10,7 @@ import BookMarkIcon from "../images/icon-bookmark-empty.svg";
 import IconInfo from "@/app/images/icon-info.svg";
 import PlayVideo from "./PlayVideo";
 import { useTrailerNavigation } from "../hooks/useTrailersNavigation";
+import useBookmarks from "../hooks/useBookmarks";
 
 interface CardSwiperProps {
   movie: any;
@@ -58,6 +59,13 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
     handleNextTrailer,
     handlePreviousTrailer,
   } = useTrailerNavigation(data);
+
+  //bookmarki
+  const { bookmarkedItems, toggleBookmark } = useBookmarks();
+
+  const handleBookmarkToggle = (movieId: string | number, type: string) => {
+    toggleBookmark(movieId, type);
+  };
 
   return (
     <div
@@ -120,11 +128,17 @@ const CardSwiper: React.FC<CardSwiperProps> = ({
       >
         {!playMovie && (
           <>
-            {/* W przyszłości z active className={`${styles.card-swiper__bookmark} ${styles['--active']}`} */}
             <button
               type="button"
-              className={styles["card-swiper__bookmark"]}
+              className={`${styles["card-swiper__bookmark"]}  ${
+                bookmarkedItems.some(
+                  (item) =>
+                    item.id === movie.id.toString() &&
+                    item.type === movie.media_type
+                ) && styles["--active"]
+              }`}
               title="bookmark"
+              onClick={() => handleBookmarkToggle(movie.id, movie.media_type)}
             >
               <BookMarkIcon className={styles["card-swiper__bookmark-icon"]} />
             </button>
