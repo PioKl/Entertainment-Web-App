@@ -79,11 +79,13 @@ export default function Header() {
               <TvIcon className={styles["nav-icon"]} />
             </Link>
           </li>
-          <li className={styles["nav__links-item"]}>
-            <Link href="/bookmarked" title="bookmarked">
-              <BookmarkIcon className={styles["nav-icon"]} />
-            </Link>
-          </li>
+          {isLoggedIn && (
+            <li className={styles["nav__links-item"]}>
+              <Link href="/bookmarked" title="bookmarked">
+                <BookmarkIcon className={styles["nav-icon"]} />
+              </Link>
+            </li>
+          )}
         </ul>
         <div className={styles["nav__account"]}>
           <Link
