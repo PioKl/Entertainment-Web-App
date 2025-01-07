@@ -1,6 +1,7 @@
 module.exports = {
   env: {
     // Warunkowe ustawienie zmiennej na podstawie środowiska
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     API_KEY: process.env.API_KEY,
   },
   webpack(config) {
@@ -38,6 +39,7 @@ module.exports = {
         pathname: "/**",
       },
     ],
+    domains: ["entertainment-web-app-backend-three.vercel.app"], // Domena do ładowania obrazów z backendu
   },
 
   // ...other config
