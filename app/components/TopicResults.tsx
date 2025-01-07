@@ -55,7 +55,6 @@ const TopicResults = ({ params, topicType }: TopicResultsProps) => {
   const router = useRouter();
   const path = topicTypePath[topicType];
   const genreId = params.id;
-  console.log(genreId);
 
   //Zmiany stron
   const initialPage = parseInt(genreId || "1", 10);
