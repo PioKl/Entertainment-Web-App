@@ -5,6 +5,7 @@
   padding-block: 1.8rem;
   margin-bottom: 2.4rem;
   background-color: var(--c-semi-dark-blue);
+  z-index: 1;
 
   @include tablet {
     padding-block: 2.4rem;
