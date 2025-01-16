@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +11,7 @@ import TvIcon from "../images/icon-nav-tv-series.svg";
 import BookmarkIcon from "../images/icon-nav-bookmark.svg";
 import AvatarPlaceholder from "@/app/images/user.svg";
 import LogoutIcon from "../images/icon-logout.svg";
+import AuthContext from "../contexts/AuthContext";
 
 import styles from "../styles/header.module.scss";
 
@@ -19,21 +20,18 @@ const apiClient = axios.create({
 });
 
 export default function Header() {
-  const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const authContext = useContext(AuthContext);
+
+  const { isLoggedIn, setIsLoggedIn, logout } = authContext;
+
   const [currentProfilePic, setCurrentProfilePic] = useState<string | null>(
     null
   ); // URL zdjęcia profilowego
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    /* !! 
-    null, undefined, 0, '' (pusty string), NaN, false → wynik to false
-    jakakolwiek inna wartość (np. string, liczba różna od zera, obiekt, tablica) → wynik to true
-    */
-    setIsLoggedIn(!!token);
     token && fetchProfilePic(token); // Pobranie aktualnego zdjęcia profilowego
-  }, []);
+  }, [setIsLoggedIn]);
 
   const fetchProfilePic = async (token: string) => {
     try {
@@ -52,9 +50,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Usuń token z localStorage
-    setIsLoggedIn(false); // Ustaw stan na wylogowany
-    router.push("/login"); // Przekieruj do strony logowania
+    logout();
   };
 
   return (
