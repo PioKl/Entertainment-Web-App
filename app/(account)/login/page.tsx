@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "../../styles/auth.module.scss";
+import AuthContext from "@/app/contexts/AuthContext";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -12,13 +13,6 @@ const apiClient = axios.create({
 
 export default function Login() {
   const router = useRouter();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      router.push("/"); // Przekierowanie na stronę główną, jeśli użytkownik jest zalogowany
-    }
-  }, [router]);
 
   const [errors, setErrors] = useState({
     emailEmpty: false,
