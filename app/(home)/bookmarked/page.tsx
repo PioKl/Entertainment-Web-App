@@ -26,7 +26,7 @@ const fetchMany = async <T extends { id: number }>(
 
 //id: number w celu korzystania z tej samej struktury danych, co w fetchMany
 export default function Bookmarked<T extends { id: number }>() {
-  const { bookmarkedItems } = useBookmarks();
+  const { bookmarkedItems, isLoading } = useBookmarks();
 
   const [mediaType, setMediaType] = useState(true);
 
@@ -55,7 +55,9 @@ export default function Bookmarked<T extends { id: number }>() {
     () => fetchMany<T>(urls)
   );
 
-  const loading = !moviesData && !error;
+  const loading = isLoading || (!moviesData && urls.length > 0 && !error);
+
+  const isEmpty = !isLoading && urls.length === 0;
 
   return (
     <main>
@@ -67,6 +69,10 @@ export default function Bookmarked<T extends { id: number }>() {
           <Loader />
         ) : error ? (
           <Error errorType="error" siteType="normal" redirectLink={false} />
+        ) : isEmpty ? (
+          <div className={stylesBookmarks["bookmarks__empty"]}>
+            <h3>No Bookmarks</h3>
+          </div>
         ) : (
           <>
             <div className={stylesBookmarks["bookmarks__buttons-container"]}>
