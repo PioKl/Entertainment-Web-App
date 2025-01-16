@@ -1,22 +1,26 @@
 "use client";
 
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, useContext, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import AvatarPlaceholderImage from "@/app/images/user.svg";
 import styles from "../../styles/profile.module.scss";
+import AuthContext from "@/app/contexts/AuthContext";
 
 const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL, // Użycie zmiennej środowiskowej
 });
 
 export default function Profile() {
+  const authContext = useContext(AuthContext);
+
+  const { isLoggedIn, setIsLoggedIn } = authContext;
+
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [currentProfilePic, setCurrentProfilePic] = useState<string | null>(
     null
   ); // URL zdjęcia profilowego
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter();
@@ -24,16 +28,11 @@ export default function Profile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push("/login"); // Przekierowanie na stronę logowania, jeśli użytkownik nie jest zalogowany
+      router.push("/login"); //Przekierowanie na stronę logowania, jeśli użytkownik nie jest zalogowany
     } else {
-      /* !! 
-    null, undefined, 0, '' (pusty string), NaN, false → wynik to false
-    jakakolwiek inna wartość (np. string, liczba różna od zera, obiekt, tablica) → wynik to true
-    */
-      setIsLoggedIn(!!token);
-      fetchProfilePic(token); // Pobranie aktualnego zdjęcia profilowego
+      fetchProfilePic(token); //Pobranie aktualnego zdjęcia profilowego
     }
-  }, [router]);
+  }, [router, setIsLoggedIn]);
 
   const fetchProfilePic = async (token: string) => {
     try {
