@@ -8,12 +8,16 @@ interface Bookmark {
 
 const useBookmarks = () => {
   const [bookmarkedItems, setBookmarkedItems] = useState<Bookmark[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Pobierz zakładki
   useEffect(() => {
     const fetchBookmarks = async () => {
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
 
       try {
         const response = await apiClient.get("/api/bookmarks/bookmarks", {
@@ -29,6 +33,8 @@ const useBookmarks = () => {
         }
       } catch (err) {
         console.error("Error fetching bookmarks:", err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -93,7 +99,7 @@ const useBookmarks = () => {
     }
   };
 
-  return { bookmarkedItems, toggleBookmark };
+  return { bookmarkedItems, toggleBookmark, isLoading };
 };
 
 export default useBookmarks;
