@@ -78,8 +78,6 @@ export default function Login() {
         emailEmpty: false,
         passwordEmpty: false,
       }));
-
-      console.log("Send");
     }
   };
   return (
