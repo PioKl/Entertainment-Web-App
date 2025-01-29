@@ -67,11 +67,7 @@ Users should be able to:
 
 ### What I learned
 
-Practice with: Next and React(hooks, custom hooks, useEffect, routing, navigation with next, modals, swiper, reusable components, swr fetching method, work with api, usage of layouts in next, transforming svg into component, usage of Image in next, work with iframe, pagination with mui) and Typescript(generally and types/interface), grid, flex.
-
-### Continued development
-
-Backend to complete this app as a full-stack
+Practice with: Next and React (hooks, custom hooks, useEffect, routing, navigation with next, modals, swiper, reusable components, swr fetching method, work with api, usage of layouts in next, transforming svg into component, usage of Image in next, work with iframe, pagination with mui) and Typescript (generally and types/interface), grid, flex. Working with mongodb, creating working auth, image upload and bookmarks with mongo and node.
 
 ### Useful resources
 
