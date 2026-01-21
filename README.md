@@ -44,7 +44,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/PioKl/Entertainment-Web-App]
-- Live Site URL: [https://entertainment-web-app-five-brown.vercel.app/]
+- Live Site URL: [https://entertainment-web-app-seven-neon.vercel.app/]
 
 ## My process
 
