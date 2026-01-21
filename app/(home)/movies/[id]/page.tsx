@@ -4,7 +4,15 @@ import Search from "@/app/components/Search";
 import GenreFilter from "@/app/components/GenreFilter";
 import GenreFilterResults from "@/app/components/GenreFilterResults";
 
-const MoviesGenreResult = ({ params }: { params: { id: string } }) => {
+type MoviesPageParams = {
+  id: string;
+};
+
+interface MoviesGenreResultProps {
+  params: MoviesPageParams;
+}
+
+const MoviesGenreResult = ({ params }: MoviesGenreResultProps) => {
   return (
     <main className={styles.main}>
       <Search searchType="movie" />
