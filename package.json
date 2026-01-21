@@ -19,7 +19,7 @@
     "@svgr/webpack": "^8.1.0",
     "axios": "^1.7.9",
     "file-loader": "^6.2.0",
-    "next": "^15.1.11",
+    "next": "^14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "swiper": "^11.1.10",
