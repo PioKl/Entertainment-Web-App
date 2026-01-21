@@ -1,7 +1,5 @@
 import MoviesGenreResult from "./MoviesGenreResult";
 
-type Params = { id: string };
-
-export default function Page(props: { params: Params }) {
-  return <MoviesGenreResult params={props.params} />;
+export default function Page({ params }: any) {
+  return <MoviesGenreResult params={params} />;
 }
