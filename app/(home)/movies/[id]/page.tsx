@@ -1,5 +1,5 @@
 import MoviesGenreResult from "./MoviesGenreResult";
 
-export default function Page({ params }: any) {
+export default async function Page({ params }: { params: { id: string } }) {
   return <MoviesGenreResult params={params} />;
 }
