@@ -84,7 +84,9 @@ h5 {
     &:before {
       width: 50%;
     }
-    color: var(--c-red);
+    & {
+      color: var(--c-red);
+    }
   }
 }
 

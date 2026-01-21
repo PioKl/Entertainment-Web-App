@@ -78,7 +78,9 @@
 
   &__details {
     @include wrapper;
-    flex: 1;
+    & {
+      flex: 1;
+    }
 
     @include tablet {
       @include wrapperRemove;

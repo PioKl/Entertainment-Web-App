@@ -2,7 +2,9 @@
 @use "./base/mixins.scss" as *;
 .bookmarks {
   @include wrapper;
-  margin-bottom: 2.4rem;
+  & {
+    margin-bottom: 2.4rem;
+  }
 
   @include tablet {
     @include wrapperRemove;
