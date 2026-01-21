@@ -92,7 +92,9 @@
   &__avatar-placeholder {
     width: 1.4rem;
     height: 1.5rem;
-    stroke: var(--c-semi-dark-blue);
+    & {
+      stroke: var(--c-semi-dark-blue);
+    }
     path {
       fill: var(--c-semi-dark-blue);
     }
@@ -117,7 +119,9 @@
     @include desktopSmall {
       margin-right: 0.8rem;
     }
-    stroke: var(--c-greyish-blue);
+    & {
+      stroke: var(--c-greyish-blue);
+    }
     path {
       fill: var(--c-greyish-blue);
     }

@@ -3,10 +3,14 @@
 
 .topic-swiper {
   @include wrapper;
-  margin-bottom: 2.4rem;
+  & {
+    margin-bottom: 2.4rem;
+  }
   //65px bierze się z wysokości headingu i jego marginesu
   //clamp jest również używany w CardSwiper
-  height: calc(6.5rem + clamp(14rem, 5.412rem + 22.901vw, 23rem));
+  & {
+    height: calc(6.5rem + clamp(14rem, 5.412rem + 22.901vw, 23rem));
+  }
 
   @include tablet {
     @include wrapperRemove;

@@ -3,7 +3,9 @@
 
 .genre-dropdown {
   @include wrapper;
-  margin-bottom: 3.2rem;
+  & {
+    margin-bottom: 3.2rem;
+  }
 
   @include tablet {
     @include wrapperRemove;
